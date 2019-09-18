@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * @author gjhdd
+ * @author gjh
  * @version 1.0
  * @create 2018-09-12 17:13
  **/
