@@ -2,6 +2,7 @@ package com.xuecheng.manage_cms.service;
 
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
+import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
@@ -67,5 +68,22 @@ public class PageService {
         queryResult.setTotal(all.getTotalElements());
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
         return queryResponseResult;
+    }
+
+    /**
+     * 新增页面
+     * @param cmsPage
+     * @return
+     */
+    public CmsPageResult add(CmsPage cmsPage){
+        //根据站点ID,页面名称,页面webpath查询,如果存在,就不保存,如果不存在,就保存
+        CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(),cmsPage.getSiteId(),cmsPage.getPageWebPath());
+        if (cmsPage1==null){
+            cmsPage.setPageId(null);
+            cmsPageRepository.save(cmsPage);
+            return new 
+        }
+        return null;
+
     }
 }
