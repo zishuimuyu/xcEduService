@@ -81,9 +81,10 @@ public class PageService {
         if (cmsPage1==null){
             cmsPage.setPageId(null);
             cmsPageRepository.save(cmsPage);
-            return new 
+            return new CmsPageResult(CommonCode.SUCCESS,cmsPage);
+        }else {
+            return  new CmsPageResult(CommonCode.FAIL,cmsPage);
         }
-        return null;
 
     }
 }
