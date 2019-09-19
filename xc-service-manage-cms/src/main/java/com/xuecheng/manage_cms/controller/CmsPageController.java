@@ -5,12 +5,10 @@ import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
+import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Administrator
@@ -39,7 +37,44 @@ public class CmsPageController implements CmsPageControllerApi {
      * @return
      */
     @Override
-    public CmsPageResult add(CmsPage cmsPage) {
-        return null;
+    @PostMapping("/add")
+    public CmsPageResult add(@RequestBody  CmsPage cmsPage) {
+        return pageService.add(cmsPage);
+    }
+
+    /**
+     * 根据ID删除页面
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    @DeleteMapping("/del/{id}")
+    public ResponseResult deleteById(@PathVariable("id") String id) {
+        return pageService.deleteById(id);
+    }
+
+    /**
+     * 根据ID查找页面
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    @GetMapping("/get/{id}")
+    public CmsPage findById(@PathVariable("id") String id) {
+        return pageService.getById(id);
+    }
+
+    /**
+     *  修改页面
+     * @param id
+     * @param cmsPage
+     * @return
+     */
+    @Override
+    @PutMapping("/edit/{id}")
+    public CmsPageResult edit(@PathVariable("id")String id,@RequestBody CmsPage cmsPage) {
+        return pageService.update(id,cmsPage);
     }
 }

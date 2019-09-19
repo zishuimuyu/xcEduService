@@ -28,6 +28,10 @@ public enum CommonCode implements ResultCode{
      */
     UNAUTHORISE(false,10002,"权限不足，无权操作！"),
     /**
+     * 参数非法
+     */
+    INVALID_PARAM(false,10003,"参数非法！"),
+    /**
      * 抱歉，系统繁忙，请稍后重试！
      */
     SERVER_ERROR(false,99999,"抱歉，系统繁忙，请稍后重试！");
