@@ -11,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Administrator
+ * CMS前端控制器
+ * @author GJH
  * @version 1.0
  * @create 2018-09-12 17:24
  **/
@@ -63,7 +64,7 @@ public class CmsPageController implements CmsPageControllerApi {
     @Override
     @GetMapping("/get/{id}")
     public CmsPage findById(@PathVariable("id") String id) {
-        return pageService.getById(id);
+        return pageService.getCmsPageById(id);
     }
 
     /**

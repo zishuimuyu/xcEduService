@@ -132,7 +132,7 @@ public class PageService {
      * @param id
      * @return
      */
-    public CmsPage getById(String id) {
+    public CmsPage getCmsPageById(String id) {
         Optional<CmsPage> optional = cmsPageRepository.findById(id);
         if (optional.isPresent()) {
             CmsPage cmsPage = optional.get();
@@ -152,7 +152,7 @@ public class PageService {
     public CmsPageResult update(String id, CmsPage cmsPage) {
         //先查找到页面
         CmsPageResult cmsPageResult = null;
-        CmsPage cmsPage1 = this.getById(id);
+        CmsPage cmsPage1 = this.getCmsPageById(id);
         if (cmsPage1 != null) {
             cmsPage1.setTemplateId(cmsPage.getTemplateId());
             cmsPage1.setSiteId(cmsPage.getSiteId());
@@ -202,40 +202,38 @@ public class PageService {
      * @return
      */
     public String getPageHtml(String pageId) {
-
+        CmsPage cmsPage = this.getCmsPageById(pageId);
+        if (cmsPage==null){
+            ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);
+        }
         //1 静态化程序远程请求DataUrl获取数据模型。
-        Map model = getModelByPageId(pageId);
+        //2 静态化程序获取页面的DataUrl
+
+        //静态化程序远程请求DataUrl获取数据模型
+        String dataUrl = cmsPage.getDataUrl();
+        Map model = getModelByDateUrl(dataUrl);
         if (model==null){
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_DATAISNULL);
         }
-        //2 静态化程序获取页面的DataUrl
-
-        //
         //3 静态化程序获取页面的模板信息
-        String templat = getTemplateByPageId(pageId);
-        if (StringUtil.isEmpty(templat)){
+        //获取页面的模板id
+        String templateId = cmsPage.getTemplateId();
+        String template = getTemplateByTemplateId(templateId);
+        if (StringUtil.isEmpty(template)){
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
         // 4 执行页面静态化
-        String html = generateHtml(templat, model);
+        String html = generateHtml(template, model);
 
         return html;
     }
 
     /**
      *获取模型数据
-     * @param pageId
+     * @param dataUrl 数据模型url
      * @return
      */
-    private Map getModelByPageId(String pageId){
-        CmsPage cmsPage = this.getById(pageId);
-        if (cmsPage==null){
-            //页面不存在
-            ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);
-        }
-        //静态化程序远程请求DataUrl获取数据模型
-        String dataUrl = cmsPage.getDataUrl();
-        CmsConfig cmsConfigById = this.getCmsConfigById(pageId);
+    private Map getModelByDateUrl(String dataUrl){
         if (StringUtil.isEmpty(dataUrl)){
             //dateurl为空
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_DATAURLISNULL);
@@ -246,13 +244,13 @@ public class PageService {
         return forEntity.getBody();
     }
 
-    private String getTemplateByPageId(String pageId){
-        CmsPage cmsPage = this.getById(pageId);
-        if (cmsPage==null){
-            ExceptionCast.cast(CmsCode.CMS_PAGE_NOTEXISTS);
-        }
-        //获取页面的模板id
-        String templateId = cmsPage.getTemplateId();
+    /**
+     * 根据模板id获取模板
+     * @param templateId
+     * @return
+     */
+    private String getTemplateByTemplateId(String templateId){
+
         if (StringUtil.isEmpty(templateId)){
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
@@ -279,7 +277,7 @@ public class PageService {
     }
 
     /**
-     * 静态化
+     * 根据模板和数据,获取页面
      * @param templateContent 模板内容
      * @param model 模型数据
      * @return
