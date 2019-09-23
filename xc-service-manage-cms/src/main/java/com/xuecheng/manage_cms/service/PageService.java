@@ -12,14 +12,14 @@ import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.framework.utils.StringUtil;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.config.CacheManagementConfigUtils;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 /**
- * @author Administrator
+ * CMC页面服务
+ * @author GJH
  * @version 1.0
  * @create 2018-09-12 18:32
  **/
