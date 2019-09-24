@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * TODO
- *
+ * cms配置信息前端控制器
  * @author：GJH
  * @createDate：2019/9/22
  * @company：洪荒宇宙加力蹲大学

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-/**
+/**CMS微服务启动类
  * @author gjh
  * @version 1.0
  * @create 2018-09-12 17:13
