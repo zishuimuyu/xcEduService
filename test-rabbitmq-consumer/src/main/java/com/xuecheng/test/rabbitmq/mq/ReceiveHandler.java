@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
  * @create 2018-06-17 21:21
  **/
 @Component
-public class ReceiveHandler {
+public class
+ReceiveHandler {
 
     @RabbitListener(queues = {RabbitmqConfig.QUEUE_INFORM_EMAIL})
     public void send_email(String msg,Message message,Channel channel){
