@@ -26,6 +26,12 @@
     <dependency>
         <groupId>io.springfox</groupId>
         <artifactId>springfox-swagger2</artifactId>
+        <exclusions>
+            <exclusion>
+                <artifactId>javassist</artifactId>
+                <groupId>org.javassist</groupId>
+            </exclusion>
+        </exclusions>
     </dependency>
     <dependency>
         <groupId>org.projectlombok</groupId>
@@ -42,6 +48,12 @@
         <groupId>org.springframework.data</groupId>
         <artifactId>spring-data-mongodb</artifactId>
         <version>1.10.9.RELEASE</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>spring-data-commons</artifactId>
+                <groupId>org.springframework.data</groupId>
+            </exclusion>
+        </exclusions>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
     <dependency>

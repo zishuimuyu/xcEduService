@@ -10,7 +10,8 @@ import lombok.ToString;
  */
 
 @ToString
-public enum CommonCode implements ResultCode {
+public enum
+CommonCode implements ResultCode {
     /**
      * 操作成功
      */
