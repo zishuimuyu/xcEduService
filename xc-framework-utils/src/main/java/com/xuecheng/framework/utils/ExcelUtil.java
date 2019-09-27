@@ -514,7 +514,7 @@ public class ExcelUtil {
             bufferImg = ImageIO.read(new File(pathOfPicture));
             ImageIO.write(bufferImg, "jpeg", byteArrayOut);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         return byteArrayOut;

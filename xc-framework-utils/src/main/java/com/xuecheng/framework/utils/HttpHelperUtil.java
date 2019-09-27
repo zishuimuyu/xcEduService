@@ -1,7 +1,7 @@
-/*
 package com.xuecheng.framework.utils;
 
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -41,17 +41,11 @@ public class HttpHelperUtil {
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 String resultStr = EntityUtils.toString(entity, "utf-8");
-
-                JSONObject result = JSONObject.fromObject(resultStr);
-                System.out.println(result);
+                JSONObject result = JSON.parseObject(resultStr);
                 if (!result.containsKey("errcode")) {
-                    // result.remove("errcode");
-                    // result.remove("errmsg");
                     return result;
                 } else {
-                    System.out.println("request url=" + url + ",return value=");
-                    System.out.println(resultStr);
-                    int errCode = result.getInt("errcode");
+                    int errCode = result.getIntValue("errcode");
                     String errMsg = result.getString("errmsg");
                 }
             }
@@ -59,12 +53,14 @@ public class HttpHelperUtil {
             System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
             e.printStackTrace();
         } finally {
-            if (response != null)
+            if (response != null){
                 try {
                     response.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
         }
 
         return null;
@@ -79,7 +75,8 @@ public class HttpHelperUtil {
         httpPost.addHeader("Content-Type", "application/json");
 
         try {
-            StringEntity requestEntity = new StringEntity(JSONObject.fromObject(data).toString(), "utf-8");
+
+            StringEntity requestEntity = new StringEntity(JSON.toJSONString(data), "utf-8");
             httpPost.setEntity(requestEntity);
 
             response = httpClient.execute(httpPost, new BasicHttpContext());
@@ -94,15 +91,14 @@ public class HttpHelperUtil {
             if (entity != null) {
                 String resultStr = EntityUtils.toString(entity, "utf-8");
 
-                JSONObject result = JSONObject.fromObject(resultStr);
+                JSONObject result = JSON.parseObject(resultStr);
                 if (!result.containsKey("errcode")) {
                     result.remove("errcode");
                     result.remove("errmsg");
                     return result;
                 } else {
-                    System.out.println("request url=" + url + ",return value=");
-                    System.out.println(resultStr);
-                    int errCode = result.getInt("errcode");
+
+                    int errCode = result.getIntValue("errcode");
                     String errMsg = result.getString("errmsg");
                 }
             }
@@ -110,57 +106,55 @@ public class HttpHelperUtil {
             System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
             e.printStackTrace();
         } finally {
-            if (response != null)
+            if (response != null){
                 try {
                     response.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
         }
 
         return null;
     }
 
-    */
-/**
-     * 文件上传到微信服务器
-     *
-     * @param fileType
-     *            文件类型
-     * @param filePath
-     *            文件路径
-     * @return JSONObject
-     * @throws Exception
-     *//*
 
+
+    /**
+     * 文件上传到微信服务器
+     * @param fileType 文件类型
+     * @param filePath  文件路径
+     * @param url
+     * @return
+     * @throws Exception
+     */
     public static JSONObject uploadFile(String fileType, String filePath, String url) throws Exception {
         String result = null;
         File file = new File(filePath);
         if (!file.exists() || !file.isFile()) {
             throw new IOException("文件不存在");
         }
-        */
-/**
-         * 第一部分
-         *//*
 
         URL urlObj = new URL(url + "&type=" + fileType + "");
         HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
-        con.setRequestMethod("POST"); // 以Post方式提交表单，默认get方式
+        // 以Post方式提交表单，默认get方式
+        con.setRequestMethod("POST");
         con.setDoInput(true);
         con.setDoOutput(true);
-        con.setUseCaches(false); // post方式不能使用缓存
+        // post方式不能使用缓存
+        con.setUseCaches(false);
         // 设置请求头信息
         con.setRequestProperty("Connection", "Keep-Alive");
         con.setRequestProperty("Charset", "UTF-8");
         // 设置边界
         String BOUNDARY = "----------" + System.currentTimeMillis();
-        //con.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
         con.setRequestProperty("Content-Type", "multipart/form-data;");
         // 请求正文信息
         // 第一部分：
         StringBuilder sb = new StringBuilder();
-        sb.append("--"); // 必须多两道线
+        // 必须多两道线
+        sb.append("--");
         sb.append(BOUNDARY);
         sb.append("\r\n");
         sb.append("Content-Disposition: form-data;name=\"file\";filename=\"" + file.getName() + "\"\r\n");
@@ -180,7 +174,8 @@ public class HttpHelperUtil {
         }
         in.close();
         // 结尾部分
-        byte[] foot = ("\r\n--" + BOUNDARY + "--\r\n").getBytes("utf-8");// 定义最后数据分隔线
+        // 定义最后数据分隔线
+        byte[] foot = ("\r\n--" + BOUNDARY + "--\r\n").getBytes("utf-8");
         out.write(foot);
         out.flush();
         out.close();
@@ -191,7 +186,6 @@ public class HttpHelperUtil {
             reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String line = null;
             while ((line = reader.readLine()) != null) {
-                // System.out.println(line);
                 buffer.append(line);
             }
             if (result == null) {
@@ -206,17 +200,17 @@ public class HttpHelperUtil {
                 reader.close();
             }
         }
-        JSONObject jsonObj = JSONObject.fromObject(result);
-        return jsonObj;
+        JSONObject jsonObject = JSON.parseObject(result);
+        return jsonObject;
     }
-    */
-/**
+
+
+    /**
      * 发送不带参数的HttpPost请求
-     *
      * @param url
      * @return
-     *//*
-
+     * @throws IOException
+     */
     public static String sendPost(String url) throws IOException {
         // 1.获得一个httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -240,15 +234,14 @@ public class HttpHelperUtil {
         return result;
     }
 
-    */
-/**
+
+    /**
      * 以jsonString形式发送HttpPost的Json请求，String形式返回响应结果
-     *
      * @param url
      * @param jsonString
      * @return
-     *//*
-
+     * @throws IOException
+     */
     public static String sendPostJsonStr(String url, String jsonString) throws IOException {
         if (jsonString == null || jsonString.isEmpty()) {
             return sendPost(url);
@@ -286,4 +279,3 @@ public class HttpHelperUtil {
     }
 
 }
-*/

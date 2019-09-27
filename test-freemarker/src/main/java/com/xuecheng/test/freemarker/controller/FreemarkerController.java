@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 
 /**
- * TODO
+ * 页面静态化前端控制器
  *
  * @author：GJH
  * @createDate：2019/9/20

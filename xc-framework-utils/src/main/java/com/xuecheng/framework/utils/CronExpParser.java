@@ -16,7 +16,7 @@ import java.util.List;
  * @Description：将Cron表达式解析成中文
  * @author：MLNSOFT-GJH
  * @createDate：2019/2/22
- * @company：北京木联能软件股份有限公司
+ * @company：洪荒宇宙加力蹲大学
  *//*
 
 public class CronExpParser {
@@ -39,7 +39,7 @@ public class CronExpParser {
             try {
                 exp = new CronExpression(cronExpression);
             } catch (ParseException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
                 return false;
             }
@@ -53,7 +53,7 @@ public class CronExpParser {
             try {
                 dStart = sdf.parse(sStart);
             } catch (ParseException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             }
 

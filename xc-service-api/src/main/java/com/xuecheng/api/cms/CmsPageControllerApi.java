@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiOperation;
  * @Description：cms分页查询的API
  * @author：MLNSOFT-GJH
  * @createDate：2019/2/24
- * @company：北京木联能软件股份有限公司
+ * @company：洪荒宇宙加力蹲大学
  */
 public interface CmsPageControllerApi {
     /**

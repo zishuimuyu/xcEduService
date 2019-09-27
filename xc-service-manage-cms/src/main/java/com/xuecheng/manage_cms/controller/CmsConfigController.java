@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * TODO
  * cms配置信息前端控制器
  * @author：GJH
  * @createDate：2019/9/22

@@ -14,7 +14,7 @@ import java.net.URL;
  *
  * @author：GJH
  * @createDate：2019/9/26
- * @company：北京木联能软件股份有限公司
+ * @company：洪荒宇宙加力蹲大学
  */
 public class NetUtil {
     public final static String LOCAL_IP = "127.0.0.1";
