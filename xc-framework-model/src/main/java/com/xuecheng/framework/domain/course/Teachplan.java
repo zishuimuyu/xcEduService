@@ -8,7 +8,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by admin on 2018/2/7.
+ * 教学计划尸体类
+ *
+ * @author：GJH
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
 @Data
 @ToString

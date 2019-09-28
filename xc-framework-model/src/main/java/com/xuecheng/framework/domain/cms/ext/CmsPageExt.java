@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * @Description：
+ *
  * @author：GJH
- * @createDate：2019/2/24
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
 @Data
 @ToString

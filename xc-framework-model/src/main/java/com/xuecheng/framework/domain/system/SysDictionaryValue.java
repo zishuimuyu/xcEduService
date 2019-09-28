@@ -7,7 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
- * Created by admin on 2018/2/6.
+ *
+ * @author：GJH
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
 @Data
 @ToString

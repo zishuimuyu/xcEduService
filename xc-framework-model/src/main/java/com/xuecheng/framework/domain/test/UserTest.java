@@ -9,7 +9,10 @@ import javax.persistence.Column;
 import java.util.Date;
 
 /**
- * Created by mrt on 2018/3/30.
+ *
+ * @author：GJH
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
 @Data
 @ToString

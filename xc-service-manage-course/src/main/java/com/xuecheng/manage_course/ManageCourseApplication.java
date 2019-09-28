@@ -6,9 +6,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * @author Administrator
- * @version 1.0
- **/
+ * 课程管理服务启动类
+ * @author：GJH
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
+ */
 @SpringBootApplication
 @EntityScan("com.xuecheng.framework.domain.course")//扫描实体类
 @ComponentScan(basePackages={"com.xuecheng.api"})//扫描接口

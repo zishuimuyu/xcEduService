@@ -7,7 +7,10 @@ import lombok.ToString;
 import java.util.List;
 
 /**
- * Created by admin on 2018/2/7.
+ * 课程分类节点
+ * @author：GJH
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
 @Data
 @ToString

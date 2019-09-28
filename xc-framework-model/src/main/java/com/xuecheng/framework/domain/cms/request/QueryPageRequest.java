@@ -4,9 +4,10 @@ import com.xuecheng.framework.model.request.RequestData;
 import lombok.Data;
 
 /**
- * @Description：分页查询的请求条件模型
+ *
  * @author：GJH
- * @createDate：2019/2/24
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
 @Data
 public class QueryPageRequest extends RequestData {

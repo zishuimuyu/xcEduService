@@ -9,8 +9,8 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * @Description：cms分页查询的API
- * @author：MLNSOFT-GJH
- * @createDate：2019/2/24
+ * @author：GJH
+ * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学
  */
 public interface CmsPageControllerApi {
