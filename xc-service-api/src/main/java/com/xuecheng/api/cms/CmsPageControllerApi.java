@@ -47,9 +47,18 @@ public interface CmsPageControllerApi {
 
     /**
      * 修改页面
-     * @param cmsPage
+     * @param cmsPage 页面对象
+     * @param id 页面id
      * @return
      */
     @ApiOperation("修改页面")
     public CmsPageResult edit(String id,CmsPage cmsPage);
+    /**
+     * 页面发布
+     * @param pageId 页面id
+     * @return
+     */
+    @ApiOperation("页面发布")
+    public ResponseResult post(String pageId);
+
 }

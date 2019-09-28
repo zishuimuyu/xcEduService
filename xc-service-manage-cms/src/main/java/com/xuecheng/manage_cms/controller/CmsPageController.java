@@ -78,4 +78,16 @@ public class CmsPageController implements CmsPageControllerApi {
     public CmsPageResult edit(@PathVariable("id")String id,@RequestBody CmsPage cmsPage) {
         return pageService.update(id,cmsPage);
     }
+
+    /**
+     * 页面发布
+     *
+     * @param pageId 页面id
+     * @return
+     */
+    @Override
+    @PostMapping("/postPage/{pageId}")
+    public ResponseResult post(@PathVariable("pageId") String pageId) {
+        return pageService.post(pageId);
+    }
 }
