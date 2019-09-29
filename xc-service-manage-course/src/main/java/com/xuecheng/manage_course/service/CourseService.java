@@ -10,7 +10,6 @@ import com.xuecheng.framework.utils.StringUtil;
 import com.xuecheng.manage_course.dao.CourseBaseRepository;
 import com.xuecheng.manage_course.dao.TeachplanMapper;
 import com.xuecheng.manage_course.dao.TeachplanRepository;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * TODO
+ * 课程服务类
  *
  * @author：GJH
  * @createDate：2019/9/28

@@ -38,11 +38,11 @@ public interface CourseControllerApi {
 
     /**
      * 分页查询
-     * @param page
-     * @param size
+     * @param page 页码
+     * @param size 每页条数
      * @param courseListRequest
      * @return
      */
     @ApiOperation("课程计划查询")
-    public List<CourseInfo> findTeachplanList(int page, int size, CourseListRequest courseListRequest);
+    public QueryResponseResult findTeachplanList(int page, int size, CourseListRequest courseListRequest);
 }

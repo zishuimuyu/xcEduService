@@ -41,7 +41,7 @@
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <poi.version>3.12</poi.version>
         <poi-ooxml.version>3.12</poi-ooxml.version>
-        <pagehelper.version>1.2.12</pagehelper.version>
+        <pagehelper.version>1.2.4</pagehelper.version>
         <hutool-all.version>4.6.1</hutool-all.version>
         <ini4j.version>0.5.4</ini4j.version>
         <zip4j.version>1.3.1</zip4j.version>

@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 28/09/2019 13:47:58
+ Date: 29/09/2019 16:07:28
 */
 
 SET NAMES utf8mb4;
@@ -375,6 +375,58 @@ INSERT INTO `course_pub` VALUES ('4028e581617f945f01617f9dabc40000', 'Bootstrap�
 INSERT INTO `course_pub` VALUES ('4028e58161bcf7f40161bcf8b77c0000', 'spring cloud实战', '所有人', '1-3', '1-3-2', '200003', '201001', '', '本课程主要从四个章节进行讲解： 1.微服务架构入门 2.spring cloud 基础入门 3.实战Spring Boot 4.注册中心eureka。', '2018-04-27 22:57:24', '203002', '204002', '54354353', 0.01, NULL, NULL, NULL, NULL, 'group1/M00/00/01/wKhlQFqO2HqAA6sPAAArlhJed-w088.jpg', '微服务架构入门 为什么要使用微服务:单体架构的特点 为什么要使用微服务:微服务的优缺点 spring cloud 基础入门 为什么要选择spring cloud? 为什么springcloud要设计一套新的版本升级规则？ 实战-Spring Boot 为什么越来越多的开发者选择使用spring boot？它解决了什么问题？ spring boot的入门例子 注册中心Eureka 微服务架构为什么需要注册中心，它解决了什么问题？  一个Eureka注册中心的入门例子 ', '2018-04-25 19:11:35');
 INSERT INTO `course_pub` VALUES ('4028e58161bd22e60161bd23672a0001', 'Javascript之VueJS', '所有人', '1-1', '1-1-9', '200002', '201001', '', 'Vue系列课程：从Vue1.0讲到Vue2.0，从理论讲到实战，理论与案例巧妙结合，让课程更容易理解！', '2018-04-27 16:57:24', '203002', '204001', '4324322', 0.01, NULL, NULL, NULL, NULL, 'group1/M00/00/01/wKhlQFqO4MmAOP53AAAcwDwm6SU490.jpg', 'Vuejs 第一讲 第一节 vue基础、常用指令、bootstrap+vue的简易留言 第二节 属性和事件、模板、交互、案例 Vuejs 第二讲 第一节 计算属性的使用、vue实例的简单方法、提高循环的性能，让重复数据显示出来 第二节 自定义过滤器、自定义指令 、自定义键盘事件、数据的监听 Vuejs 第三讲 ', '2018-04-25 19:11:35');
 INSERT INTO `course_pub` VALUES ('4028e58161bd3b380161bd3bcd2f0000', 'Redis从入门到项目实战', '', '1-3', '1-3-2', '200002', '201001', NULL, 'redis在当前的大型网站和500强企业中，已被广泛应用。 redis是基于内存的key-value数据库，比传统的关系型数据库在性能方面有非常大的优势。 肖老师这套视频，精选了redis在实际项目中的十几个应用场景。通过本课程的学习，可以让学员快速掌握redis在实际项目中如何应用。 作为架构师，redis是必须要掌握的技能！', '2018-05-16 18:55:36', '203002', '204001', '32432432', 0.01, NULL, NULL, NULL, NULL, 'group1/M00/00/01/wKhlQFqO5yqAQMozAAAqor3lyz0082.jpg', '第一章：redis简介 第一节 NoSQL简介 第二节 认识Redis 第二章：redis的安装与配置 第三章：Redis数据操作 第四章：Redis进阶操作 第五章：Redis主从配置 ', '2018-04-25 19:11:35');
+
+-- ----------------------------
+-- Table structure for t_code
+-- ----------------------------
+DROP TABLE IF EXISTS `t_code`;
+CREATE TABLE `t_code`  (
+  `id` int(11) NOT NULL COMMENT '主键id',
+  `code` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编码',
+  `description` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `value` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '值',
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '名称',
+  `order_no` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '序号',
+  `comments` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `modify_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of t_code
+-- ----------------------------
+INSERT INTO `t_code` VALUES (2, 'user_status', '用户状态：冻结', '2', '冻结', '2', '2930', NULL, '2019-09-29 16:04:03');
+INSERT INTO `t_code` VALUES (3, 'user_status', '用户状态：删除', '3', '删除', '3', '7', NULL, '2019-09-29 16:04:07');
+INSERT INTO `t_code` VALUES (4, 'user_sex', '用户性别：男', '1', '男', '1', 'wqewq', NULL, '2019-09-29 16:04:10');
+INSERT INTO `t_code` VALUES (5, 'user_sex', '用户性别：女', '2', '女', '2', 'sadsa', NULL, '2019-09-29 16:04:13');
+INSERT INTO `t_code` VALUES (6, 'user_is_sa', '管理员权限：否', '0', '否', '1', 'retre', NULL, '2019-09-29 16:04:17');
+INSERT INTO `t_code` VALUES (7, 'user_is_sa', '管理员权限：是', '1', '是', '2', 'trytr', NULL, '2019-09-29 16:04:20');
+INSERT INTO `t_code` VALUES (8, 'machine_state', '', '1', '停机', '1', '', NULL, '2019-09-29 16:04:22');
+INSERT INTO `t_code` VALUES (9, 'machine_state', '', '2', '备用', '2', '', NULL, '2019-09-29 16:04:27');
+
+-- ----------------------------
+-- Table structure for t_param
+-- ----------------------------
+DROP TABLE IF EXISTS `t_param`;
+CREATE TABLE `t_param`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `param_name` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键参数名称',
+  `param_value` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '参数值',
+  `option1` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '可选项1',
+  `option2` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '可选项2',
+  `description` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数描述',
+  `comments` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of t_param
+-- ----------------------------
+INSERT INTO `t_param` VALUES (1, '1', '1', '1', NULL, '1', NULL, NULL, NULL);
+INSERT INTO `t_param` VALUES (2, '2', '2', '2', '2', '2', '2', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for teachplan
