@@ -8,8 +8,11 @@ import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
+import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
+import com.xuecheng.framework.model.response.QueryResult;
 import com.xuecheng.framework.model.response.ResponseResult;
+import com.xuecheng.framework.utils.XcOauth2Util;
 import com.xuecheng.manage_course.dao.CourseMapper;
 import com.xuecheng.manage_course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,16 +71,15 @@ public class CourseController implements CourseControllerApi {
      * @return
      */
     @Override
-    public QueryResponseResult findTeachplanList(int page, int size, CourseListRequest courseListRequest) {
-        if (courseListRequest == null) {
-            courseListRequest = new CourseListRequest();
-        }
+    @GetMapping("/coursebase/list/{page}/{size}")
+    public QueryResponseResult<CourseInfo> findTeachplanList(@PathVariable("page") int page,
+                                                             @PathVariable("size") int size,
+                                                             CourseListRequest courseListRequest) {
 
-        Page<CourseBase> courseBasePage = courseMapper.findCourseList();
-        List<CourseBase> result = courseBasePage.getResult();
+        QueryResult<CourseInfo> courseInfoQueryResult = new QueryResult<>();
 
+        new QueryResponseResult<CourseInfo>(CommonCode.SUCCESS, courseInfoQueryResult);
         return null;
     }
-
 
 }

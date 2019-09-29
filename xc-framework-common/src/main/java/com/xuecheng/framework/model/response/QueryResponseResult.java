@@ -5,12 +5,13 @@ import lombok.ToString;
 
 /**
  * 查询结果响应类
+ * @param <T>
  */
 @Data
 @ToString
-public class QueryResponseResult extends ResponseResult {
+public class QueryResponseResult<T> extends ResponseResult {
 
-    QueryResult queryResult;
+    QueryResult<T> queryResult;
 
     public QueryResponseResult(ResultCode resultCode,QueryResult queryResult){
         super(resultCode);

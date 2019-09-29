@@ -44,5 +44,5 @@ public interface CourseControllerApi {
      * @return
      */
     @ApiOperation("课程计划查询")
-    public QueryResponseResult findTeachplanList(int page, int size, CourseListRequest courseListRequest);
+    public QueryResponseResult<CourseInfo> findTeachplanList(int page, int size, CourseListRequest courseListRequest);
 }
