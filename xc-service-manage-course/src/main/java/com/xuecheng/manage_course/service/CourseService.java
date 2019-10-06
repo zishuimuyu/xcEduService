@@ -1,13 +1,16 @@
 package com.xuecheng.manage_course.service;
 
 import com.xuecheng.framework.domain.course.CourseBase;
+import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
+import com.xuecheng.framework.domain.course.response.AddCourseResult;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.framework.utils.StringUtil;
 import com.xuecheng.manage_course.dao.CourseBaseRepository;
+import com.xuecheng.manage_course.dao.CourseMarketRepository;
 import com.xuecheng.manage_course.dao.TeachplanMapper;
 import com.xuecheng.manage_course.dao.TeachplanRepository;
 import org.springframework.beans.BeanUtils;
@@ -37,6 +40,8 @@ public class CourseService {
 
     @Autowired
     TeachplanRepository teachplanRepository;
+    @Autowired
+    CourseMarketRepository courseMarketRepository;
 
     /**
      * 查询课程计划
@@ -106,5 +111,102 @@ public class CourseService {
             return savedTeachplan.getId();
         }
         return teachplanList.get(0).getId();
+    }
+
+    /**
+     * 添加课程提交
+     *
+     * @param courseBase
+     * @return
+     */
+    public AddCourseResult addCourseBase(CourseBase courseBase) {
+        //课程状态为未发布
+        courseBase.setStatus("202001");
+        courseBaseRepository.save(courseBase);
+        return new AddCourseResult(CommonCode.SUCCESS, courseBase.getId());
+    }
+
+    /**
+     * 根据id获取课程信息
+     *
+     * @param courseId
+     * @return
+     */
+    public CourseBase getCoursebaseById(String courseId) {
+        Optional<CourseBase> optional = courseBaseRepository.findById(courseId);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
+    }
+
+    /**
+     * 更新课程基础信息
+     *
+     * @param courseId
+     * @param courseBase
+     * @return
+     */
+    public ResponseResult updateCoursebase(String courseId, CourseBase courseBase) {
+        CourseBase one = this.getCoursebaseById(courseId);
+        if (one == null) {
+            ExceptionCast.cast(CommonCode.INVALID_PARAM);
+        }
+        //修改课程信息
+        one.setName(courseBase.getName());
+        one.setMt(courseBase.getMt());
+        one.setSt(courseBase.getSt());
+        one.setGrade(courseBase.getGrade());
+        one.setStudymodel(courseBase.getStudymodel());
+        one.setUsers(courseBase.getUsers());
+        one.setDescription(courseBase.getDescription());
+        CourseBase save = courseBaseRepository.save(one);
+        return new ResponseResult(CommonCode.SUCCESS);
+    }
+
+    /**
+     * 根据id查询课程营销信息
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    public CourseMarket getCourseMarketById(String courseId) {
+        Optional<CourseMarket> optional = courseMarketRepository.findById(courseId);
+        if (!optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
+    }
+
+    /**
+     * 更新课程营销信息
+     * @param id
+     * @param courseMarket
+     * @return
+     */
+    @Transactional
+    public CourseMarket updateCourseMarket(String id, CourseMarket courseMarket) {
+        CourseMarket one = this.getCourseMarketById(id);
+        if (one != null) {
+            //课程信息已存在
+            one.setCharge(courseMarket.getCharge());
+            //课程有效期，开始时间
+            one.setStartTime(courseMarket.getStartTime());
+            //课程有效期，结束时间
+            one.setEndTime(courseMarket.getEndTime());
+            one.setPrice(courseMarket.getPrice());
+            one.setQq(courseMarket.getQq());
+            one.setValid(courseMarket.getValid());
+            one = courseMarketRepository.save(one);
+        } else {
+            //课程营销信息不存在,新增一个
+            //添加课程营销信息
+            one = new CourseMarket();
+            BeanUtils.copyProperties(courseMarket, one);
+            //设置课程id
+            one.setId(id);
+            one = courseMarketRepository.save(one);
+        }
+        return one;
     }
 }

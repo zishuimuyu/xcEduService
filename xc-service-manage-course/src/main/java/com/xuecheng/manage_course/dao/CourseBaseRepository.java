@@ -10,4 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @company：洪荒宇宙加力蹲大学
  */
 public interface CourseBaseRepository extends JpaRepository<CourseBase,String> {
+
 }
