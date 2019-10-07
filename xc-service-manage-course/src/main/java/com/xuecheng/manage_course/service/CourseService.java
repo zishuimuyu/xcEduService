@@ -4,7 +4,7 @@ import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
-import com.xuecheng.framework.domain.course.response.AddCourseResult;
+import com.xuecheng.framework.domain.course.response.CourseResult;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
@@ -119,11 +119,11 @@ public class CourseService {
      * @param courseBase
      * @return
      */
-    public AddCourseResult addCourseBase(CourseBase courseBase) {
+    public CourseResult addCourseBase(CourseBase courseBase) {
         //课程状态为未发布
         courseBase.setStatus("202001");
         courseBaseRepository.save(courseBase);
-        return new AddCourseResult(CommonCode.SUCCESS, courseBase.getId());
+        return new CourseResult(CommonCode.SUCCESS, courseBase.getId());
     }
 
     /**

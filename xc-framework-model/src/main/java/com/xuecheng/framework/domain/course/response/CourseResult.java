@@ -6,18 +6,20 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- *
+ * 课程相关响应类
  * @author：GJH
  * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
 @ToString
-public class DeleteCourseResult extends ResponseResult {
-    public DeleteCourseResult(ResultCode resultCode, String courseId) {
+public class CourseResult extends ResponseResult {
+
+    private String courseId;
+
+    public CourseResult(ResultCode resultCode, String courseId) {
         super(resultCode);
-        this.courseid = courseid;
+        this.courseId = courseId;
     }
-    private String courseid;
 
 }

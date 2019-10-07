@@ -1,6 +1,11 @@
 package com.xuecheng.framework.client;
 
-
+/**
+ * 系统服务名称列表
+ * @author：GJH
+ * @createDate：2019/01/01
+ * @company：洪荒宇宙加力蹲大学
+ */
 public class XcServiceList {
     public static final String XC_GOVERN_CENTER = "xc-govern-center";
     public static final String XC_SERVICE_PORTALVIEW = "xc-service-portalview";

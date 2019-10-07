@@ -2,8 +2,8 @@ package com.xuecheng.framework.domain.cms.response;
 
 import com.xuecheng.framework.model.response.ResultCode;
 import lombok.ToString;
+
 /**
- *
  * @author：GJH
  * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学

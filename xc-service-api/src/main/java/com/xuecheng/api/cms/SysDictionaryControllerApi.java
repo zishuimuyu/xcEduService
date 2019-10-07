@@ -5,7 +5,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * TODO
  * 数据字典API
  *
  * @author：GJH

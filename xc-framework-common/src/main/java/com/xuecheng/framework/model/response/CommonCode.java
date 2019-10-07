@@ -3,12 +3,10 @@ package com.xuecheng.framework.model.response;
 import lombok.ToString;
 
 /**
- * @Author: mrt.
- * @Description:
- * @Date:Created in 2018/1/24 18:33.
- * @Modified By:
+ * @author：GJH
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
-
 @ToString
 public enum
 CommonCode implements ResultCode {

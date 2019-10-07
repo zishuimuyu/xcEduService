@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 /**
+ * cms站点
  *
  * @author：GJH
  * @createDate：2019/9/28

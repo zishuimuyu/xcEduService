@@ -1,15 +1,13 @@
 package com.xuecheng.manage_course.controller;
 
-import com.github.pagehelper.Page;
 import com.xuecheng.api.course.CourseControllerApi;
-import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
-import com.xuecheng.framework.domain.course.response.AddCourseResult;
+import com.xuecheng.framework.domain.course.response.CourseResult;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
@@ -90,7 +88,7 @@ public class CourseController implements CourseControllerApi {
      */
     @Override
     @PostMapping("/coursebase/add")
-    public AddCourseResult addCourseBase(@RequestBody CourseBase courseBase) {
+    public CourseResult addCourseBase(@RequestBody CourseBase courseBase) {
         return courseService.addCourseBase(courseBase);
     }
 

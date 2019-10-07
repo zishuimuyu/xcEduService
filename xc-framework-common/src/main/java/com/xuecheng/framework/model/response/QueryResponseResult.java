@@ -5,7 +5,10 @@ import lombok.ToString;
 
 /**
  * 查询结果响应类
- * @param <T>
+ *
+ * @author：GJH
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
 @Data
 @ToString
@@ -13,9 +16,9 @@ public class QueryResponseResult<T> extends ResponseResult {
 
     QueryResult<T> queryResult;
 
-    public QueryResponseResult(ResultCode resultCode,QueryResult queryResult){
+    public QueryResponseResult(ResultCode resultCode, QueryResult queryResult) {
         super(resultCode);
-       this.queryResult = queryResult;
+        this.queryResult = queryResult;
     }
 
 }

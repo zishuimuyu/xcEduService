@@ -12,7 +12,7 @@ import java.io.File;
  */
 public class test {
     public static void main(String[] args) throws Exception {
-        String path = "F:\\项目\\15-学成在线\\day16 Spring Security Oauth2\\代码\\xcEduService01";
+        String path = "F:\\项目\\15-学成在线\\day08 课程图片管理 分布式文件系统\\代码\\xcEduService01";
         File file = new File(path);
         File[] files = file.listFiles();
 

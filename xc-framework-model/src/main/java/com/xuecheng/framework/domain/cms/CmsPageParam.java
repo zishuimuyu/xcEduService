@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- *
+ * cms查询参数
  * @author：GJH
  * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学

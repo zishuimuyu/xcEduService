@@ -20,10 +20,15 @@ import java.io.Serializable;
 @GenericGenerator(name = "jpa-assigned", strategy = "assigned")
 public class CoursePic implements Serializable {
     private static final long serialVersionUID = -916357110051689486L;
-
+    /**
+     * 课程id
+     */
     @Id
     @GeneratedValue(generator = "jpa-assigned")
     private String courseid;
+    /**
+     * 图片id
+     */
     private String pic;
 
 }

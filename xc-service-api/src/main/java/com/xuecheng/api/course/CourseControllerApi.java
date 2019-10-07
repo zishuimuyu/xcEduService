@@ -6,7 +6,7 @@ import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
-import com.xuecheng.framework.domain.course.response.AddCourseResult;
+import com.xuecheng.framework.domain.course.response.CourseResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
@@ -57,7 +57,7 @@ public interface CourseControllerApi {
      * @return
      */
     @ApiOperation("添加课程基础信息")
-    public AddCourseResult addCourseBase(CourseBase courseBase);
+    public CourseResult addCourseBase(CourseBase courseBase);
 
     /**
      * 根据课程id查询课程信息

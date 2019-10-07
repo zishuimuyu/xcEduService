@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by mrt on 2018/5/22.
+ * 基础前端控制器
+ * @author：GJH
+ * @createDate：2019/9/28
+ * @company：洪荒宇宙加力蹲大学
  */
 public class BaseController {
     protected HttpServletRequest request;

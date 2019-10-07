@@ -51,7 +51,7 @@ import java.util.Optional;
  * @create 2018-09-12 18:32
  **/
 @Service
-public class PageService {
+public class CmsPageService {
 
     @Autowired
     CmsConfigRepository cmsConfigRepository;

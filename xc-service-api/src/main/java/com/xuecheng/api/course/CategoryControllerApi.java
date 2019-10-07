@@ -5,13 +5,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * TODO
+ * 课程分类接口
  *
  * @author：GJH
  * @createDate：2019/10/5
  * @company：洪荒宇宙加力蹲大学
  */
-@Api(value = "课程分类管理",description = "课程分类管理",tags = {"课程分类管理"})
+@Api(value = "课程分类管理", description = "课程分类管理", tags = {"课程分类管理"})
 public interface CategoryControllerApi {
 
 

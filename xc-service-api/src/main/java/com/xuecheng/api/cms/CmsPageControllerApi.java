@@ -8,7 +8,8 @@ import com.xuecheng.framework.model.response.ResponseResult;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * @Description：cms分页查询的API
+ * cms分页查询的API
+ *
  * @author：GJH
  * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学
@@ -16,8 +17,9 @@ import io.swagger.annotations.ApiOperation;
 public interface CmsPageControllerApi {
     /**
      * 分页查询
-     * @param page 页码
-     * @param size 页面大小
+     *
+     * @param page             页码
+     * @param size             页面大小
      * @param queryPageRequest 查询条件Model
      * @return
      */
@@ -25,12 +27,15 @@ public interface CmsPageControllerApi {
 
     /**
      * 新增页面
+     *
      * @param cmsPage
      * @return
      */
     public CmsPageResult add(CmsPage cmsPage);
+
     /**
      * 根据ID删除页面
+     *
      * @param id
      * @return
      */
@@ -39,6 +44,7 @@ public interface CmsPageControllerApi {
 
     /**
      * 根据ID查找页面
+     *
      * @param id
      * @return
      */
@@ -47,14 +53,17 @@ public interface CmsPageControllerApi {
 
     /**
      * 修改页面
+     *
      * @param cmsPage 页面对象
-     * @param id 页面id
+     * @param id      页面id
      * @return
      */
     @ApiOperation("修改页面")
-    public CmsPageResult edit(String id,CmsPage cmsPage);
+    public CmsPageResult edit(String id, CmsPage cmsPage);
+
     /**
      * 页面发布
+     *
      * @param pageId 页面id
      * @return
      */

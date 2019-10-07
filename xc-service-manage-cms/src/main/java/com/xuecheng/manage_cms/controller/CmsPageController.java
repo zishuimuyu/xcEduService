@@ -6,12 +6,13 @@ import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
-import com.xuecheng.manage_cms.service.PageService;
+import com.xuecheng.manage_cms.service.CmsPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * CMS前端控制器
+ *
  * @author GJH
  * @version 1.0
  * @create 2018-09-12 17:24
@@ -21,14 +22,14 @@ import org.springframework.web.bind.annotation.*;
 public class CmsPageController implements CmsPageControllerApi {
 
     @Autowired
-    PageService pageService;
+    CmsPageService cmsPageService;
 
     @Override
     @GetMapping("/list/{page}/{size}")
     public QueryResponseResult findList(@PathVariable("page") int page, @PathVariable("size") int size, QueryPageRequest queryPageRequest) {
 
         //调用service
-        return pageService.findList(page, size, queryPageRequest);
+        return cmsPageService.findList(page, size, queryPageRequest);
     }
 
     /**
@@ -39,8 +40,8 @@ public class CmsPageController implements CmsPageControllerApi {
      */
     @Override
     @PostMapping("/add")
-    public CmsPageResult add(@RequestBody  CmsPage cmsPage) {
-        return pageService.add(cmsPage);
+    public CmsPageResult add(@RequestBody CmsPage cmsPage) {
+        return cmsPageService.add(cmsPage);
     }
 
     /**
@@ -52,7 +53,7 @@ public class CmsPageController implements CmsPageControllerApi {
     @Override
     @DeleteMapping("/del/{id}")
     public ResponseResult deleteById(@PathVariable("id") String id) {
-        return pageService.deleteById(id);
+        return cmsPageService.deleteById(id);
     }
 
     /**
@@ -64,19 +65,20 @@ public class CmsPageController implements CmsPageControllerApi {
     @Override
     @GetMapping("/get/{id}")
     public CmsPage findById(@PathVariable("id") String id) {
-        return pageService.getCmsPageById(id);
+        return cmsPageService.getCmsPageById(id);
     }
 
     /**
-     *  修改页面
+     * 修改页面
+     *
      * @param id
      * @param cmsPage
      * @return
      */
     @Override
     @PutMapping("/edit/{id}")
-    public CmsPageResult edit(@PathVariable("id")String id,@RequestBody CmsPage cmsPage) {
-        return pageService.update(id,cmsPage);
+    public CmsPageResult edit(@PathVariable("id") String id, @RequestBody CmsPage cmsPage) {
+        return cmsPageService.update(id, cmsPage);
     }
 
     /**
@@ -88,6 +90,6 @@ public class CmsPageController implements CmsPageControllerApi {
     @Override
     @PostMapping("/postPage/{pageId}")
     public ResponseResult post(@PathVariable("pageId") String pageId) {
-        return pageService.post(pageId);
+        return cmsPageService.post(pageId);
     }
 }
