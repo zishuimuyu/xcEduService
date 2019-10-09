@@ -6,13 +6,17 @@ import java.util.regex.PatternSyntaxException;
 
 /**
  * 电话号码格式化工具类
+ *
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
  */
 public class PhoneFormatCheckUtils {
 
     /**
      * 大陆号码或香港号码均可
      */
-    public static boolean isPhoneLegal(String str)throws PatternSyntaxException {
+    public static boolean isPhoneLegal(String str) throws PatternSyntaxException {
         return isChinaPhoneLegal(str) || isHKPhoneLegal(str);
     }
 
@@ -35,7 +39,7 @@ public class PhoneFormatCheckUtils {
     /**
      * 香港手机号码8位数，5|6|8|9开头+7位任意数
      */
-    public static boolean isHKPhoneLegal(String str)throws PatternSyntaxException {
+    public static boolean isHKPhoneLegal(String str) throws PatternSyntaxException {
         String regExp = "^(5|6|8|9)\\d{7}$";
         Pattern p = Pattern.compile(regExp);
         Matcher m = p.matcher(str);

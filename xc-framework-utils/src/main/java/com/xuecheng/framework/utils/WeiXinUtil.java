@@ -19,6 +19,10 @@ import java.util.Map;
 
 /**
  * 微信工具类
+ *
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
  */
 public class WeiXinUtil {
 

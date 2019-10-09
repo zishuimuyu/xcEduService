@@ -31,7 +31,7 @@ public class IdWorker {
     // 机器ID最大值
     private final static long maxWorkerId = -1L ^ (-1L << workerIdBits);
     // 数据中心ID最大值
-    private final static long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
+    private final static long maxDataCenterId = -1L ^ (-1L << datacenterIdBits);
     // 毫秒内自增位
     private final static long sequenceBits = 12L;
     // 机器ID偏左移12位
@@ -52,7 +52,7 @@ public class IdWorker {
     private final long datacenterId;
 
     public IdWorker() {
-        this.datacenterId = getDatacenterId(maxDatacenterId);
+        this.datacenterId = getDataCenterId(maxDataCenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
 
@@ -64,8 +64,8 @@ public class IdWorker {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
-        if (datacenterId > maxDatacenterId || datacenterId < 0) {
-            throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
+        if (datacenterId > maxDataCenterId || datacenterId < 0) {
+            throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDataCenterId));
         }
         this.workerId = workerId;
         this.datacenterId = datacenterId;
@@ -139,7 +139,7 @@ public class IdWorker {
      * 数据标识id部分
      * </p>
      */
-    protected static long getDatacenterId(long maxDatacenterId) {
+    protected static long getDataCenterId(long maxDataCenterId) {
         long id = 0L;
         try {
             InetAddress ip = InetAddress.getLocalHost();
@@ -150,10 +150,10 @@ public class IdWorker {
                 byte[] mac = network.getHardwareAddress();
                 id = ((0x000000FF & (long) mac[mac.length - 1])
                         | (0x0000FF00 & (((long) mac[mac.length - 2]) << 8))) >> 6;
-                id = id % (maxDatacenterId + 1);
+                id = id % (maxDataCenterId + 1);
             }
         } catch (Exception e) {
-            System.out.println(" getDatacenterId: " + e.getMessage());
+            System.out.println(" getDataCenterId: " + e.getMessage());
         }
         return id;
     }

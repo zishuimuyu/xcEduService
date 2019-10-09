@@ -20,6 +20,12 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * http工具类
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
+ */
 public class HttpHelperUtil {
 
     public static JSONObject httpGet(String url) {

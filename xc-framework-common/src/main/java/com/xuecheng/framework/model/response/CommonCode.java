@@ -34,7 +34,6 @@ CommonCode implements ResultCode {
     PERMISSION_LOST(false, 70002, "登录信息已过期"),
 
 
-    //系统错误：40001-49999
     /**
      * 抱歉，系统繁忙，请稍后重试！
      */

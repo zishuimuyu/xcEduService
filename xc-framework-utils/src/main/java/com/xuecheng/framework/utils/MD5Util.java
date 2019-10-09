@@ -4,8 +4,12 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
 /**
- * Created by admin on 2018/3/5.
+ * MD5工具类
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
  */
 public class MD5Util {
 

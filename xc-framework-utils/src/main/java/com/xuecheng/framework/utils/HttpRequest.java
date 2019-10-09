@@ -9,6 +9,12 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 发送http请求的工具类
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
+ */
 public class HttpRequest {
     /**
      * 向指定URL发送GET方法的请求

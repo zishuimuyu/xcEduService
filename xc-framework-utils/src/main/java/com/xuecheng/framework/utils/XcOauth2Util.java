@@ -6,8 +6,13 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+
 /**
- * Created by mrt on 2018/5/25.
+ * TODO
+ *
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
  */
 public class XcOauth2Util {
 

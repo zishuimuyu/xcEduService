@@ -7,12 +7,13 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
-/***
+/**
  * 得到中文首字母
- * @author gjh
  *
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
  */
-
 public class PingYinUtil {
 
 
@@ -37,7 +38,7 @@ public class PingYinUtil {
                 try {
                     result.append(PinyinHelper.toHanyuPinyinStringArray(aT1, format)[0]);
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
-                 //   logger.error("转换汉字拼音错误!", e);
+                    //   logger.error("转换汉字拼音错误!", e);
                 }
             } else {
                 // 非汉字不进行转换，直接添加

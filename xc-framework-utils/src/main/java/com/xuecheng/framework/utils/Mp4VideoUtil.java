@@ -4,8 +4,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * Created by admin on 2018/3/6.
+ * TODO
+ *
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
  */
 public class Mp4VideoUtil extends VideoUtil {
 

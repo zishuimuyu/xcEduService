@@ -3,8 +3,13 @@ package com.xuecheng.framework.utils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 /**
- * Created by mrt on 2018/5/22.
+ * TODO
+ *
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
  */
 public class BCryptUtil {
     public static String encode(String password){

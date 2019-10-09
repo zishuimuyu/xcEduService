@@ -8,8 +8,13 @@ import org.springframework.security.jwt.JwtHelper;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+
 /**
- * Created by mrt on 2018/5/25.
+ * 权限工具类
+ *
+ * @author：GJH
+ * @createDate：2019/10/9
+ * @company：洪荒宇宙加力蹲大学
  */
 public class Oauth2Util {
 
