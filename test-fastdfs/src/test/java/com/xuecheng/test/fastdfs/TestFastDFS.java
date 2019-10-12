@@ -40,7 +40,7 @@ public class TestFastDFS {
             //上传成功后拿到文件Id
             String fileId = storageClient.upload_file1(filePath, "png", null);
             System.out.println(fileId);
-            //group1/M00/00/01/wKhlQVuhU3eADb4pAAAawU0ID2Q159.png
+            //group1/M00/00/00/wKgZhV2hy9iAcsLLAADqBMhMZWA974.png
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,10 +65,10 @@ public class TestFastDFS {
             StorageClient1 storageClient1 = new StorageClient1(trackerServer,storeStorage);
             //下载文件
             //文件id
-            String fileId = "group1/M00/00/01/wKhlQVuhU3eADb4pAAAawU0ID2Q159.png";
+            String fileId = "group1/M00/00/00/wKgZhV2hy9iAcsLLAADqBMhMZWA974.png";
             byte[] bytes = storageClient1.download_file1(fileId);
             //使用输出流保存文件
-            FileOutputStream fileOutputStream = new FileOutputStream(new File("c:/logo.png"));
+            FileOutputStream fileOutputStream = new FileOutputStream(new File("E:/头像1.png"));
             fileOutputStream.write(bytes);
         } catch (IOException e) {
             e.printStackTrace();
