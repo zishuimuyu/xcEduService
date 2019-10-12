@@ -1,4 +1,4 @@
-server:
+ server:
   port: 31200
 spring:
   application:

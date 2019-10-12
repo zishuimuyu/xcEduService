@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- *
+ * 文件上传结果接受类
  * @author：GJH
  * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学

@@ -148,5 +148,19 @@ public class CourseController implements CourseControllerApi {
         }
     }
 
+    /**
+     * 添加课程图片
+     *
+     * @param courseId 课程id
+     * @param pic      图片路径
+     * @return
+     */
+    @Override
+    @PostMapping("/coursepic/add")
+    public ResponseResult addCoursePic(@RequestParam("courseId") String courseId, @RequestParam("pic")String pic) {
+        //保存课程图片
+        return courseService.saveCoursePic(courseId,pic);
+    }
+
 
 }

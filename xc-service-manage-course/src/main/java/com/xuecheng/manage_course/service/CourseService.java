@@ -2,6 +2,7 @@ package com.xuecheng.manage_course.service;
 
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
+import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.response.CourseResult;
@@ -9,10 +10,7 @@ import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.framework.utils.StringUtil;
-import com.xuecheng.manage_course.dao.CourseBaseRepository;
-import com.xuecheng.manage_course.dao.CourseMarketRepository;
-import com.xuecheng.manage_course.dao.TeachplanMapper;
-import com.xuecheng.manage_course.dao.TeachplanRepository;
+import com.xuecheng.manage_course.dao.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +40,8 @@ public class CourseService {
     TeachplanRepository teachplanRepository;
     @Autowired
     CourseMarketRepository courseMarketRepository;
+    @Autowired
+    CoursePicRepository coursePicRepository;
 
     /**
      * 查询课程计划
@@ -180,6 +180,7 @@ public class CourseService {
 
     /**
      * 更新课程营销信息
+     *
      * @param id
      * @param courseMarket
      * @return
@@ -208,5 +209,31 @@ public class CourseService {
             one = courseMarketRepository.save(one);
         }
         return one;
+    }
+
+    /**
+     * 添加课程图片
+     *
+     * @param courseId 课程id
+     * @param pic      图片路径
+     * @return
+     */
+    @Transactional
+    public ResponseResult saveCoursePic(String courseId, String pic) {
+        CoursePic coursePic = null;
+        //查询课程的图片信息是否已存在
+        Optional<CoursePic> picOptional = coursePicRepository.findById(courseId);
+        if (picOptional.isPresent()) {
+            ///存在
+            coursePic = picOptional.get();
+        }
+        if (coursePic == null) {
+            //不存在
+            coursePic = new CoursePic();
+            coursePic.setCourseid(courseId);
+        }
+        coursePic.setPic(pic);
+        CoursePic save = coursePicRepository.save(coursePic);
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 }

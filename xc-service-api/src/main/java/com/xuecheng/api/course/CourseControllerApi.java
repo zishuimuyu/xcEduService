@@ -14,7 +14,8 @@ import io.swagger.annotations.ApiOperation;
 
 
 /**
- * @Description：课程管理前端控制器
+ * 课程管理接口
+ *
  * @author：GJH
  * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学
@@ -91,13 +92,20 @@ public interface CourseControllerApi {
     /**
      * 更新课程营销信息
      *
-     * @param id     课程id
+     * @param id           课程id
      * @param courseMarket 课程营销实体
      * @return
      */
     @ApiOperation("更新课程营销信息")
     public ResponseResult updateCourseMarket(String id, CourseMarket courseMarket);
 
-
+    /**
+     * 添加课程图片
+     * @param courseId 课程id
+     * @param pic 图片路径
+     * @return
+     */
+    @ApiOperation("添加课程图片")
+    public ResponseResult addCoursePic(String courseId,String pic);
 
 }
