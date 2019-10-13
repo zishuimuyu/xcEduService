@@ -5,12 +5,12 @@ spring:
     name: xc-govern-center #指定服务名
 eureka:
   client:
-    registerWithEureka: true #服务注册，是否将自己注册到Eureka服务中
+    registerWithEureka: true #服务注册，是否将自己注册到Eureka服务中,单机环境设置为false,高可用环境(两个注册中心)设置为true
     fetchRegistry: true #服务发现，是否从Eureka中获取注册信息
     serviceUrl: #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果不配置则默认本机8761端口）
-      defaultZone: ${EUREKA_SERVER:http://eureka02:50102/eureka/}
+      defaultZone: ${EUREKA_SERVER:http://eureka02:50102/eureka/} #上报地址,即把自己的状态上报到这个地址
   server:
-    enable-self-preservation: false #是否开启自我保护模式
+    enable-self-preservation: false #是否开启自我保护模式,开启后,可避免服务本身并未死亡,因某种原因未能上报状态而被注册中心从列表中剔除生产环境中建议开启
     eviction-interval-timer-in-ms: 60000 #服务注册表清理间隔（单位毫秒，默认是60*1000）
   instance:
     hostname: ${EUREKA_DOMAIN:eureka01}
