@@ -236,4 +236,34 @@ public class CourseService {
         CoursePic save = coursePicRepository.save(coursePic);
         return new ResponseResult(CommonCode.SUCCESS);
     }
+
+    /**
+     * 查询课程图片
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    public CoursePic findCoursePic(String courseId) {
+        Optional<CoursePic> picOptional = coursePicRepository.findById(courseId);
+        if (picOptional.isPresent()) {
+            CoursePic coursePic = picOptional.get();
+            return coursePic;
+        }
+        return null;
+    }
+
+    /**
+     * 删除课程图片
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    @Transactional
+    public ResponseResult deleteCoursePic(String courseId) {
+        long result = coursePicRepository.deleteByCourseid(courseId);
+        if (result > 0) {
+            return new ResponseResult(CommonCode.SUCCESS);
+        }
+        return new ResponseResult(CommonCode.FAIL);
+    }
 }

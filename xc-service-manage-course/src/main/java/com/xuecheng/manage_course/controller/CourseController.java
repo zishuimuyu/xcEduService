@@ -3,6 +3,7 @@ package com.xuecheng.manage_course.controller;
 import com.xuecheng.api.course.CourseControllerApi;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
+import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
@@ -160,6 +161,30 @@ public class CourseController implements CourseControllerApi {
     public ResponseResult addCoursePic(@RequestParam("courseId") String courseId, @RequestParam("pic")String pic) {
         //保存课程图片
         return courseService.saveCoursePic(courseId,pic);
+    }
+
+    /**
+     * 删除课程图片
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    @Override
+    @DeleteMapping("/coursepic/delete")
+    public ResponseResult deleteCoursePic(@RequestParam("courseId") String courseId) {
+        return courseService.deleteCoursePic(courseId);
+    }
+
+    /**
+     * 获取课程基础信息
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    @Override
+    @GetMapping("/coursepic/list/{courseId}")
+    public CoursePic findCoursePic(@PathVariable("courseId") String courseId) {
+        return courseService.findCoursePic(courseId);
     }
 
 

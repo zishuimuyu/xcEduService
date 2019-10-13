@@ -11,4 +11,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @company：洪荒宇宙加力蹲大学
  */
 public interface CoursePicRepository extends JpaRepository<CoursePic,String> {
+    /**
+     * 删除图片,返回值是操作成功的结果记录数,
+     * @param courseId
+     * @return
+     */
+    long deleteByCourseid(String courseId);
 }
