@@ -11,7 +11,7 @@ import java.util.List;
  * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学
  */
-public interface TeachplanRepository extends JpaRepository<Teachplan,String> {
+public interface  TeachplanRepository extends JpaRepository<Teachplan,String> {
     /**
      * 根据课程id和parentId查找节点
      * @param courseId

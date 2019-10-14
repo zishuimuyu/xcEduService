@@ -12,5 +12,10 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TeachplanMapper {
+    /**
+     * 查询课程计划信息
+     * @param courseId
+     * @return
+     */
     public TeachplanNode selectList(String courseId);
 }

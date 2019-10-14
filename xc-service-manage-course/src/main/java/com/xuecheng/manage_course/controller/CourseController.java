@@ -6,6 +6,7 @@ import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
+import com.xuecheng.framework.domain.course.ext.CourseView;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
 import com.xuecheng.framework.domain.course.response.CourseResult;
@@ -185,6 +186,18 @@ public class CourseController implements CourseControllerApi {
     @GetMapping("/coursepic/list/{courseId}")
     public CoursePic findCoursePic(@PathVariable("courseId") String courseId) {
         return courseService.findCoursePic(courseId);
+    }
+
+    /**
+     * 查询课程视图信息,包括课程基本信息,图片,营销信息,课程计划
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    @Override
+    @GetMapping("/courseview/{id}")
+    public CourseView courseview(@PathVariable("id") String courseId) {
+         return courseService.getCourseView(courseId);
     }
 
 

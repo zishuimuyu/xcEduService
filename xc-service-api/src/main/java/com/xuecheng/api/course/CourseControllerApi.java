@@ -5,6 +5,7 @@ import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
+import com.xuecheng.framework.domain.course.ext.CourseView;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
 import com.xuecheng.framework.domain.course.response.CourseResult;
@@ -107,7 +108,7 @@ public interface CourseControllerApi {
      * @return
      */
     @ApiOperation("添加课程图片")
-    public ResponseResult addCoursePic(String courseId,String pic);
+    public ResponseResult addCoursePic(String courseId, String pic);
 
     /**
      * 删除课程图片
@@ -122,7 +123,15 @@ public interface CourseControllerApi {
      * @param courseId 课程id
      * @return
      */
-    @ApiOperation("获取课程基础信息")
+    @ApiOperation("获取课程图片信息")
     public CoursePic findCoursePic(String courseId);
+
+    /**
+     * 查询课程视图信息,包括课程基本信息,图片,营销信息,课程计划
+     * @param courseId 课程id
+     * @return
+     */
+    @ApiOperation("课程视图查询")
+    public CourseView courseview(String courseId);
 
 }
