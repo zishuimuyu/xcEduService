@@ -17,16 +17,18 @@ import java.util.Map;
 
 /**
  * PoiExcel工具类
+ *
  * @author：GJH
  * @createDate：2019/9/6
  */
 @SuppressWarnings("deprecation")
 public class PoiExcelUtil {
     /** 日志 */
- //   private static Logger logger = Logger.getLogger(PoiExcelUtil.class);
+    //   private static Logger logger = Logger.getLogger(PoiExcelUtil.class);
+
     /**
      * 获取excel中所有的合并单元格的值，封装成List<Map<String,Object>>
-     * 
+     *
      * @parame sheet excel的sheet页
      */
     public static List<Map<String, Object>> getAllMergedValueFromExcel(Sheet sheet) {
@@ -57,11 +59,9 @@ public class PoiExcelUtil {
 
     /**
      * 获取excel文件的sheet页
-     * 
-     * @param excelFile
-     *            excel文件
-     * @param sheetNo
-     *            sheet页的编号，从0 开始
+     *
+     * @param excelFile excel文件
+     * @param sheetNo   sheet页的编号，从0 开始
      * @return
      * @throws IOException
      * @throws FileNotFoundException
@@ -82,7 +82,7 @@ public class PoiExcelUtil {
 
     /**
      * 获取合并单元格的值
-     * 
+     *
      * @param sheet
      * @param row
      * @param column
@@ -117,7 +117,7 @@ public class PoiExcelUtil {
 
     /**
      * 判断合并了行
-     * 
+     *
      * @param sheet
      * @param row
      * @param column
@@ -146,12 +146,10 @@ public class PoiExcelUtil {
 
     /**
      * 判断指定的单元格是否是合并单元格
-     * 
+     *
      * @param sheet
-     * @param row
-     *            行下标
-     * @param column
-     *            列下标
+     * @param row    行下标
+     * @param column 列下标
      * @return
      */
     private static boolean isMergedRegion(Sheet sheet, int row, int column) {
@@ -177,17 +175,12 @@ public class PoiExcelUtil {
 
     /**
      * 获取指定起始行列的excel的sheet页上所有的单元格的属性值(此处的终止行列的值必须大于起始值，而且仅行合并，若存在列合并，可以拆分为行合并)
-     * 
-     * @param sheet
-     *            选中的excel的sheet页
-     * @param beginRow
-     *            指定的起始行
-     * @param endRow
-     *            指定的终止行
-     * @param beginCol
-     *            指定的起始列
-     * @param endCol
-     *            指定的终止列
+     *
+     * @param sheet    选中的excel的sheet页
+     * @param beginRow 指定的起始行
+     * @param endRow   指定的终止行
+     * @param beginCol 指定的起始列
+     * @param endCol   指定的终止列
      * @return
      */
     public static List<Map<String, Object>> getCellAttrHasMerged(Sheet sheet, int beginRow, int endRow, int beginCol,
@@ -231,17 +224,12 @@ public class PoiExcelUtil {
 
     /**
      * 获取指定起始行列的excel的sheet页上所有的单元格的属性值（选中的excel表格区域不包含合并单元格）
-     * 
-     * @param sheet
-     *            选中的excel的sheet页
-     * @param beginRow
-     *            指定的起始行
-     * @param endRow
-     *            指定的终止行
-     * @param beginCol
-     *            指定的起始列
-     * @param endCol
-     *            指定的终止列
+     *
+     * @param sheet    选中的excel的sheet页
+     * @param beginRow 指定的起始行
+     * @param endRow   指定的终止行
+     * @param beginCol 指定的起始列
+     * @param endCol   指定的终止列
      * @return
      */
     public static List<Map<String, Object>> getCellAttrNoMerged(Sheet sheet, int beginRow, int endRow, int beginCol,
@@ -265,7 +253,7 @@ public class PoiExcelUtil {
 
     /**
      * 判断sheet页中是否含有合并单元格
-     * 
+     *
      * @param sheet
      * @return
      */
@@ -276,16 +264,12 @@ public class PoiExcelUtil {
 
     /**
      * 合并单元格
-     * 
+     *
      * @param sheet
-     * @param firstRow
-     *            开始行
-     * @param lastRow
-     *            结束行
-     * @param firstCol
-     *            开始列
-     * @param lastCol
-     *            结束列
+     * @param firstRow 开始行
+     * @param lastRow  结束行
+     * @param firstCol 开始列
+     * @param lastCol  结束列
      */
     @SuppressWarnings("unused")
     private static void mergeRegion(Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol) {
@@ -294,7 +278,7 @@ public class PoiExcelUtil {
 
     /**
      * 获取单元格的值
-     * 
+     *
      * @param cell
      * @return
      */
@@ -314,12 +298,10 @@ public class PoiExcelUtil {
         }
         return "";
     }
+
     /**
-     * 
-     * @param wb
-     *            HSSFWorkbook
-     * @param fileName
-     *            文件名称
+     * @param wb       HSSFWorkbook
+     * @param fileName 文件名称
      * @return 0：正常导出，-1：文档不存在，-2：导出失败，-3：输出流关闭异常
      */
     public static int writeWorkBool(HSSFWorkbook wb, String fileName) {
@@ -330,12 +312,12 @@ public class PoiExcelUtil {
             wb.write(fos);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-           // logger.error(e.getMessage());
+            // logger.error(e.getMessage());
             System.out.println("导出文档失败，错误原因：" + e.getMessage());
             res = -1;
         } catch (IOException e) {
             e.printStackTrace();
-          //  logger.error(e.getMessage());
+            //  logger.error(e.getMessage());
             System.out.println("导出文档失败，错误原因：" + e.getMessage());
             res = -2;
         } finally {
@@ -344,7 +326,7 @@ public class PoiExcelUtil {
                     fos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-              //      logger.error(e.getMessage());
+                    //      logger.error(e.getMessage());
                     res = -3;
                 }
             }
@@ -354,11 +336,9 @@ public class PoiExcelUtil {
 
     /**
      * 创建HSSFSheet工作簿
-     * 
-     * @param wb
-     *            HSSFWorkbook
-     * @param sheetName
-     *            String
+     *
+     * @param wb        HSSFWorkbook
+     * @param sheetName String
      * @return HSSFSheet
      */
     public static HSSFSheet createSheet(HSSFWorkbook wb, String sheetName) {
@@ -371,13 +351,10 @@ public class PoiExcelUtil {
 
     /**
      * 创建HSSFRow
-     * 
-     * @param sheet
-     *            HSSFSheet
-     * @param rowNum
-     *            行数
-     * @param height
-     *            高度
+     *
+     * @param sheet  HSSFSheet
+     * @param rowNum 行数
+     * @param height 高度
      * @return HSSFRow
      */
     public static HSSFRow createRow(HSSFSheet sheet, int rowNum, int height) {
@@ -388,17 +365,12 @@ public class PoiExcelUtil {
 
     /**
      * 功能：创建CellStyle样式
-     * 
-     * @param wb
-     *            HSSFWorkbook
-     * @param backgroundColor
-     *            背景色
-     * @param foregroundColor
-     *            前置色
-     * @param halign
-     *            位置
-     * @param font
-     *            字体
+     *
+     * @param wb              HSSFWorkbook
+     * @param backgroundColor 背景色
+     * @param foregroundColor 前置色
+     * @param halign          位置
+     * @param font            字体
      * @return 样式
      */
 
@@ -416,17 +388,12 @@ public class PoiExcelUtil {
 
     /**
      * 功能：创建带边框的CellStyle样式
-     * 
-     * @param wb
-     *            HSSFWorkbook
-     * @param backgroundColor
-     *            背景色
-     * @param foregroundColor
-     *            前置色
-     * @param halign
-     *            位置
-     * @param font
-     *            字体
+     *
+     * @param wb              HSSFWorkbook
+     * @param backgroundColor 背景色
+     * @param foregroundColor 前置色
+     * @param halign          位置
+     * @param font            字体
      * @return 样式
      */
     public static CellStyle createBorderCellStyle(HSSFWorkbook wb, short backgroundColor, short foregroundColor,
@@ -447,13 +414,10 @@ public class PoiExcelUtil {
 
     /**
      * 功能：创建CELL
-     * 
-     * @param row
-     *            HSSFRow
-     * @param cellNum
-     *            int
-     * @param style
-     *            HSSFStyle
+     *
+     * @param row     HSSFRow
+     * @param cellNum int
+     * @param style   HSSFStyle
      * @return HSSFCell
      */
     public static HSSFCell createCell(HSSFRow row, int cellNum, CellStyle style) {
@@ -468,17 +432,12 @@ public class PoiExcelUtil {
 
     /**
      * 功能：合并单元格
-     * 
-     * @param sheet
-     *            HSSFSheet
-     * @param firstRow
-     *            int
-     * @param lastRow
-     *            int
-     * @param firstColumn
-     *            int
-     * @param lastColumn
-     *            int
+     *
+     * @param sheet       HSSFSheet
+     * @param firstRow    int
+     * @param lastRow     int
+     * @param firstColumn int
+     * @param lastColumn  int
      * @return int 合并区域号码
      */
     public static int mergeCell(HSSFSheet sheet, int firstRow, int lastRow, int firstColumn, int lastColumn) {
@@ -487,15 +446,11 @@ public class PoiExcelUtil {
 
     /**
      * 功能：创建字体
-     * 
-     * @param wb
-     *            HSSFWorkbook
-     * @param boldweight
-     *            short
-     * @param color
-     *            short
-     * @param size
-     *            short
+     *
+     * @param wb         HSSFWorkbook
+     * @param boldweight short
+     * @param color      short
+     * @param size       short
      * @return Font
      */
     public static Font createFont(HSSFWorkbook wb, short boldweight, short color, short size) {
@@ -508,13 +463,10 @@ public class PoiExcelUtil {
 
     /**
      * 设置合并单元格的边框样式
-     * 
-     * @param sheet
-     *            HSSFSheet
-     * @param ca
-     *            CellRangAddress
-     * @param style
-     *            CellStyle
+     *
+     * @param sheet HSSFSheet
+     * @param ca    CellRangAddress
+     * @param style CellStyle
      */
     public static void setRegionStyle(HSSFSheet sheet, CellRangeAddress ca, CellStyle style) {
         for (int i = ca.getFirstRow(); i <= ca.getLastRow(); i++) {
