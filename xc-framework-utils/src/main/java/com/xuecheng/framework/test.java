@@ -1,10 +1,7 @@
 package com.xuecheng.framework;
 
 import cn.hutool.core.io.FileUtil;
-import net.lingala.zip4j.core.ZipFile;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
+
 
 import java.io.File;
 
