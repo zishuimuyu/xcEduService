@@ -15,6 +15,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
+@NoArgsConstructor
 @Entity
 @Table(name="category")
 @GenericGenerator(name = "jpa-assigned", strategy = "assigned")

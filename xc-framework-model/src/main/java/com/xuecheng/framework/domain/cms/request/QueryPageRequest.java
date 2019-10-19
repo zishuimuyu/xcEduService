@@ -2,6 +2,8 @@ package com.xuecheng.framework.domain.cms.request;
 
 import com.xuecheng.framework.model.request.RequestData;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  *
@@ -10,6 +12,8 @@ import lombok.Data;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
+@ToString
+@NoArgsConstructor
 public class QueryPageRequest extends RequestData {
     /**
      * 站点id

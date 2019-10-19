@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * 课程相关响应类
+ * 课程预览响应对象
  * @author：GJH
  * @createDate：2019/9/28
  * @company：洪荒宇宙加力蹲大学
@@ -15,13 +15,13 @@ import lombok.ToString;
 @Data
 @ToString
 @NoArgsConstructor
-public class CourseResult extends ResponseResult {
-
-    private String courseId;
-
-    public CourseResult(ResultCode resultCode, String courseId) {
+public class CoursePublishResult extends ResponseResult {
+    /**
+     * 页面预览的url，必须得到页面id才可以拼装
+     */
+    String previewUrl;
+    public CoursePublishResult(ResultCode resultCode, String previewUrl) {
         super(resultCode);
-        this.courseId = courseId;
+        this.previewUrl = previewUrl;
     }
-
 }

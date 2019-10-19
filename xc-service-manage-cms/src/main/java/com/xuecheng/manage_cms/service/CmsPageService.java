@@ -137,7 +137,7 @@ public class CmsPageService {
     /**
      * 根据ID查找页面
      *
-     * @param id
+     * @param id 课程id
      * @return
      */
     public CmsPage getCmsPageById(String id) {
@@ -151,10 +151,10 @@ public class CmsPageService {
     }
 
     /**
-     * 更新页面
+     * 修改更新页面
      *
-     * @param id
-     * @param cmsPage
+     * @param id 课程id
+     * @param cmsPage 课程对象
      * @return
      */
     public CmsPageResult update(String id, CmsPage cmsPage) {
@@ -379,5 +379,21 @@ public class CmsPageService {
         String msgStr = JSON.toJSONString(msg);
         //发送给MQ
         rabbitTemplate.convertAndSend(RabbitmqConfig.EX_ROUTING_CMS_POSTPAGE,cmsPage.getSiteId(),msgStr);
+    }
+
+    /**
+     * 保存页面,已存在则更新,不存在就新增
+     * @param cmsPage
+     * @return
+     */
+    public CmsPageResult save(CmsPage cmsPage) {
+        //根据页面唯一索引判断页面是否已存在
+        CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        if (cmsPage1!=null){
+            //已存在,更新
+           return this.update(cmsPage1.getPageId(),cmsPage);
+        }
+        //不存在就添加
+        return this.add(cmsPage);
     }
 }

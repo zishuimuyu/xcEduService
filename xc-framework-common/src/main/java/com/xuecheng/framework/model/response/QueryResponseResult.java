@@ -1,7 +1,7 @@
 package com.xuecheng.framework.model.response;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /**
  * 查询结果响应类
@@ -11,7 +11,7 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 public class QueryResponseResult<T> extends ResponseResult {
 
     QueryResult<T> queryResult;

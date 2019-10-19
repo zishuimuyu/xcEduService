@@ -43,15 +43,6 @@ public interface CmsPageControllerApi {
     public ResponseResult deleteById(String id);
 
     /**
-     * 根据ID查找页面
-     *
-     * @param id
-     * @return
-     */
-    @ApiOperation("根据页面的查找页面")
-    public CmsPage findById(String id);
-
-    /**
      * 修改页面
      *
      * @param cmsPage 页面对象
@@ -60,6 +51,24 @@ public interface CmsPageControllerApi {
      */
     @ApiOperation("修改页面")
     public CmsPageResult edit(String id, CmsPage cmsPage);
+    /**
+     * 保存页面
+     *
+     * @param cmsPage 页面对象
+     * @return
+     */
+    @ApiOperation("保存页面")
+    public CmsPageResult save(CmsPage cmsPage);
+
+    /**
+     * 根据ID查找页面
+     *
+     * @param id
+     * @return
+     */
+    @ApiOperation("根据页面的查找页面")
+    public CmsPage findById(String id);
+
 
     /**
      * 页面发布

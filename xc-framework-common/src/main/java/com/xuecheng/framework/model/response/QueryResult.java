@@ -1,7 +1,7 @@
 package com.xuecheng.framework.model.response;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 public class QueryResult<T> {
     /**
      * 数据列表

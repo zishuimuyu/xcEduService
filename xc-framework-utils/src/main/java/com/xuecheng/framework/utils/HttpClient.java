@@ -75,8 +75,9 @@ public class HttpClient {
     }
 
     public void addParameter(String key, String value) {
-        if (param == null)
+        if (param == null) {
             param = new HashMap<String, String>();
+        }
         param.put(key, value);
     }
 
@@ -97,10 +98,11 @@ public class HttpClient {
             StringBuilder url = new StringBuilder(this.url);
             boolean isFirst = true;
             for (String key : param.keySet()) {
-                if (isFirst)
+                if (isFirst) {
                     url.append("?");
-                else
+                } else {
                     url.append("&");
+                }
                 url.append(key).append("=").append(param.get(key));
             }
             this.url = url.toString();
@@ -115,26 +117,31 @@ public class HttpClient {
     private void setEntity(HttpEntityEnclosingRequestBase http) {
         if (param != null) {
             List<NameValuePair> nvps = new LinkedList<NameValuePair>();
-            for (String key : param.keySet())
-                nvps.add(new BasicNameValuePair(key, param.get(key))); // 参数
-            http.setEntity(new UrlEncodedFormEntity(nvps, Consts.UTF_8)); // 设置参数
+            for (String key : param.keySet()) {
+                // 参数
+                nvps.add(new BasicNameValuePair(key, param.get(key)));
+            }// 设置参数
+            http.setEntity(new UrlEncodedFormEntity(nvps, Consts.UTF_8));
         }
         if (xmlParam != null) {
             http.setEntity(new StringEntity(xmlParam, Consts.UTF_8));
         }
     }
 
-    private void execute(HttpUriRequest http) throws ClientProtocolException,
-            IOException {
+    /**
+     * @param http
+     * @throws ClientProtocolException
+     * @throws IOException
+     */
+    private void execute(HttpUriRequest http) throws ClientProtocolException, IOException {
         CloseableHttpClient httpClient = null;
         try {
             if (isHttps) {
                 SSLContext sslContext = new SSLContextBuilder()
                         .loadTrustMaterial(null, new TrustStrategy() {
                             // 信任所有
-                            public boolean isTrusted(X509Certificate[] chain,
-                                                     String authType)
-                                    throws CertificateException {
+                            @Override
+                            public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
                                 return true;
                             }
                         }).build();
@@ -148,8 +155,9 @@ public class HttpClient {
             CloseableHttpResponse response = httpClient.execute(http);
             try {
                 if (response != null) {
-                    if (response.getStatusLine() != null)
+                    if (response.getStatusLine() != null) {
                         statusCode = response.getStatusLine().getStatusCode();
+                    }
                     HttpEntity entity = response.getEntity();
                     // 响应内容
                     content = EntityUtils.toString(entity, Consts.UTF_8);
@@ -184,8 +192,7 @@ public class HttpClient {
             connection.setRequestProperty("Accept-Charset", "UTF-8");
             connection.setRequestProperty("contentType", "UTF-8");
             connection.setRequestProperty("connection", "Keep-Alive");
-            connection.setRequestProperty("user-agent",
-                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 建立实际的连接
             connection.connect();
             // 获取所有响应头字段
@@ -195,8 +202,7 @@ public class HttpClient {
                 System.out.println(key + "--->" + map.get(key));
             }
             // 定义 BufferedReader输入流来读取URL的响应
-            in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream(), "utf-8"));
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UFT-8"));
             String line;
             while ((line = in.readLine()) != null) {
                 result += line;
@@ -237,8 +243,7 @@ public class HttpClient {
             // 设置通用的请求属性
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent",
-                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
@@ -249,8 +254,7 @@ public class HttpClient {
             // flush输出流的缓冲
             out.flush();
             // 定义BufferedReader输入流来读取URL的响应
-            in = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line;
             while ((line = in.readLine()) != null) {
                 result += line;

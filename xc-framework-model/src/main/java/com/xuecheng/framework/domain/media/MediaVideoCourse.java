@@ -2,7 +2,7 @@ package com.xuecheng.framework.domain.media;
 
 import com.xuecheng.framework.utils.MD5Util;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 @Document(collection = "media_video_course")
 public class MediaVideoCourse {
 

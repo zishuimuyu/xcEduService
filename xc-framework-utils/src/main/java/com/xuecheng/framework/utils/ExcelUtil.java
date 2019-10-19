@@ -105,7 +105,7 @@ public class ExcelUtil {
         for (int i = 0; i < data.size(); i++) {
             row = sheet.createRow(index);
             // 自动调整列宽
-//            sheet.autoSizeColumn(index);
+            sheet.autoSizeColumn(index);
             for (int j = 0; j < data.get(i).size(); j++) {
                 //将内容按顺序赋给对应的列对象
                 row.createCell(j, Cell.CELL_TYPE_STRING).setCellValue(data.get(i).get(j));

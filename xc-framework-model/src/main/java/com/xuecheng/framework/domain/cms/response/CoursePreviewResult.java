@@ -13,7 +13,6 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class CoursePreviewResult extends ResponseResult {
     public CoursePreviewResult(ResultCode resultCode, String url) {

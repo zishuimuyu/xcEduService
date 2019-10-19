@@ -1,10 +1,13 @@
 package com.xuecheng.framework.domain.system;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 系统值值实体类
@@ -14,7 +17,7 @@ import javax.persistence.*;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 @Entity
 @Table(name="t_code")
 @GenericGenerator(name = "jpa-assigned", strategy = "assigned")

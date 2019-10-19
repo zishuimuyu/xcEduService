@@ -2,6 +2,7 @@ package com.xuecheng.framework.domain.course.ext;
 
 import com.xuecheng.framework.domain.course.Teachplan;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -12,6 +13,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@NoArgsConstructor
 public class TeachplanExt extends Teachplan {
 
     /**

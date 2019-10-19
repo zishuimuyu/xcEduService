@@ -1,7 +1,7 @@
 package com.xuecheng.framework.domain.search;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 public class CourseSearchParam implements Serializable {
     /**
      * 关键字

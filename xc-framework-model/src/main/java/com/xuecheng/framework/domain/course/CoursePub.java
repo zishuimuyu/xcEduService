@@ -1,7 +1,7 @@
 package com.xuecheng.framework.domain.course;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import java.util.Date;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "course_pub")
 @GenericGenerator(name = "jpa-assigned", strategy = "assigned")

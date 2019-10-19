@@ -13,6 +13,7 @@ import java.util.Map;
  */
 @Data
 @ToString
+@NoArgsConstructor
 public class CmsConfigModel {
     private String key;
     private String name;

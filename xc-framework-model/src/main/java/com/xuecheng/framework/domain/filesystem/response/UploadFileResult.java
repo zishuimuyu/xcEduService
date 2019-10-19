@@ -5,7 +5,7 @@ import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.framework.model.response.ResultCode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /**
  * 文件上传结果接受类
@@ -14,7 +14,7 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 public class UploadFileResult extends ResponseResult{
     @ApiModelProperty(value = "文件信息", example = "true", required = true)
     FileSystem fileSystem;

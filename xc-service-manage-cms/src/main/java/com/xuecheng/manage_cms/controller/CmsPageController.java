@@ -33,7 +33,7 @@ public class CmsPageController implements CmsPageControllerApi {
     }
 
     /**
-     * 新增页面
+     * 新增页面(只是新增)
      *
      * @param cmsPage
      * @return
@@ -82,6 +82,18 @@ public class CmsPageController implements CmsPageControllerApi {
     }
 
     /**
+     * 保存页面
+     *
+     * @param cmsPage 页面对象
+     * @return
+     */
+    @Override
+    @PostMapping("/save")
+    public CmsPageResult save(@RequestBody CmsPage cmsPage) {
+        return cmsPageService.save(cmsPage);
+    }
+
+    /**
      * 页面发布
      *
      * @param pageId 页面id
@@ -92,4 +104,5 @@ public class CmsPageController implements CmsPageControllerApi {
     public ResponseResult post(@PathVariable("pageId") String pageId) {
         return cmsPageService.post(pageId);
     }
+
 }

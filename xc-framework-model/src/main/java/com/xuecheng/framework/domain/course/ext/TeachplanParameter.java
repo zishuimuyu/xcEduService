@@ -2,6 +2,7 @@ package com.xuecheng.framework.domain.course.ext;
 
 import com.xuecheng.framework.domain.course.Teachplan;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Data
 @ToString
+@NoArgsConstructor
 public class TeachplanParameter extends Teachplan {
 
     /**

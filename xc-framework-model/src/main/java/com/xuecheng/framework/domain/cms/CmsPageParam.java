@@ -11,6 +11,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@NoArgsConstructor
 public class CmsPageParam {
     /**
      * 参数名称

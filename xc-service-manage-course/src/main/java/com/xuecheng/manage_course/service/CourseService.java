@@ -1,19 +1,25 @@
 package com.xuecheng.manage_course.service;
 
+import com.xuecheng.framework.domain.cms.CmsPage;
+import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseView;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
+import com.xuecheng.framework.domain.course.response.CourseCode;
+import com.xuecheng.framework.domain.course.response.CoursePublishResult;
 import com.xuecheng.framework.domain.course.response.CourseResult;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.framework.utils.StringUtil;
+import com.xuecheng.manage_course.client.CmsPageClient;
 import com.xuecheng.manage_course.dao.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -43,11 +49,29 @@ public class CourseService {
     CourseMarketRepository courseMarketRepository;
     @Autowired
     CoursePicRepository coursePicRepository;
+    @Autowired
+    CmsPageClient cmsPageClient;
+    //从appication.yml配置文件中读取内容
+    /**
+     * 页面预的数据模型url
+     */
+    @Value("${course‐publish.dataUrlPre}")
+    private String publish_dataUrlPre;
+    @Value("${course‐publish.pagePhysicalPath}")
+    private String publish_page_physicalpath;
+    @Value("${course‐publish.pageWebPath}")
+    private String publish_page_webpath;
+    @Value("${course‐publish.siteId}")
+    private String publish_siteId;
+    @Value("${course‐publish.templateId}")
+    private String publish_templateId;
+    @Value("${course‐publish.previewUrl}")
+    private String previewUrl;
 
     /**
      * 查询课程计划
      *
-     * @param courseId
+     * @param courseId 课程id
      * @return
      */
     public TeachplanNode findTeachplanList(String courseId) {
@@ -91,7 +115,12 @@ public class CourseService {
         return new ResponseResult(CommonCode.SUCCESS);
     }
 
-
+    /**
+     * 获取课程计划
+     *
+     * @param courseId 课程id
+     * @return
+     */
     private String getTeachplanRoot(String courseId) {
         Optional<CourseBase> optional = courseBaseRepository.findById(courseId);
         if (!optional.isPresent()) {
@@ -128,23 +157,25 @@ public class CourseService {
     }
 
     /**
-     * 根据id获取课程信息
+     * 根据id获取课程基本信息
      *
-     * @param courseId
+     * @param courseId 课程id
      * @return
      */
     public CourseBase getCoursebaseById(String courseId) {
-        Optional<CourseBase> optional = courseBaseRepository.findById(courseId);
-        if (optional.isPresent()) {
-            return optional.get();
+        Optional<CourseBase> courseBaseOptional = courseBaseRepository.findById(courseId);
+        if (courseBaseOptional.isPresent()) {
+            return courseBaseOptional.get();
         }
+        ExceptionCast.cast(CourseCode.COURSE_GET_NOTEXISTS);
         return null;
     }
+
 
     /**
      * 更新课程基础信息
      *
-     * @param courseId
+     * @param courseId   课程id
      * @param courseBase
      * @return
      */
@@ -179,10 +210,11 @@ public class CourseService {
         return null;
     }
 
+
     /**
      * 更新课程营销信息
      *
-     * @param id
+     * @param id           课程id
      * @param courseMarket
      * @return
      */
@@ -299,4 +331,44 @@ public class CourseService {
         courseView.setTeachplanNode(teachplanNode);
         return courseView;
     }
+
+    /**
+     * 课程预览
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    public CoursePublishResult preview(String courseId) {
+        CourseBase courseBase = this.getCoursebaseById(courseId);
+        if (courseBase == null) {
+
+        }
+        //准备cmsPage信息
+        CmsPage cmsPage = new CmsPage();
+        cmsPage.setSiteId(publish_siteId);
+        cmsPage.setDataUrl(publish_dataUrlPre + courseId);
+        cmsPage.setPageName(courseId + ".html");
+        cmsPage.setPageAliase(courseBase.getName());
+        cmsPage.setPagePhysicalPath(publish_page_physicalpath);
+        cmsPage.setPageWebPath(publish_page_webpath);
+        cmsPage.setTemplateId(publish_templateId);
+        //1.请求cms添加页面
+        //1.1远程调用cms服务的添加页面的方法
+        CmsPageResult cmsPageResult = cmsPageClient.saveCmsPage(cmsPage);
+        if (!cmsPageResult.isSuccess()) {
+            //如果添加失败
+            return new CoursePublishResult(CommonCode.FAIL, null);
+        }
+        //返回保存成功的页面
+        CmsPage cmsPage1 = cmsPageResult.getCmsPage();
+        //获取页面id
+        String pageId = cmsPage1.getPageId();
+
+        //2.拼装页面预览的URL
+        String url = previewUrl + pageId;
+        //3.返回CoursePublishResult,也就是返回页面预览的URL,
+        return new CoursePublishResult(CommonCode.SUCCESS, url);
+    }
+
+
 }

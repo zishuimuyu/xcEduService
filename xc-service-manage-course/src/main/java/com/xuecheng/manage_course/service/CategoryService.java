@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * TODO
+ * 课程分类服务类
  *
  * @author：GJH
  * @createDate：2019/10/6
@@ -16,8 +16,11 @@ import org.springframework.stereotype.Service;
 public class CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
-    //查询分类
-    public CategoryNode findList(){
+
+    /**
+     * 查询分类
+     */
+    public CategoryNode findList() {
         return categoryMapper.selectList();
     }
 }

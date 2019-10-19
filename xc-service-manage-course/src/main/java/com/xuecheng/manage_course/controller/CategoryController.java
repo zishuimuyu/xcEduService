@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * TODO
+ * 课程分类前端控制器
  *
  * @author：GJH
  * @createDate：2019/10/6

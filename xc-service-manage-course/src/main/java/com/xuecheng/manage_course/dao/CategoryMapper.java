@@ -4,7 +4,7 @@ import com.xuecheng.framework.domain.course.ext.CategoryNode;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * TODO
+ * 课程分类mapper
  *
  * @author：GJH
  * @createDate：2019/10/6
@@ -12,7 +12,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CategoryMapper {
-    //查询分类
+    /**
+     * 查询课程分类列表
+     */
     public CategoryNode selectList();
 }
 

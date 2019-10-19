@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 
 /**
  * id生成器,使用时创建此类的对象即可
+ *
  * @author：GJH
  * @createDate：2019/10/9
  * @company：洪荒宇宙加力蹲大学
@@ -178,7 +179,7 @@ public class IdGenerator {
         for (int i = 0; i < 5; i++) {
             executorService.execute(() -> {
 
-                System.out.println("分布式 ID: {},:"+idGenerator.snowflakeId());
+                System.out.println("分布式 ID: {},:" + idGenerator.snowflakeId());
 //                System.out.println("批次号 ID: {},:"+idGenerator.batchId(1001,100));
 //                System.out.println("simpleUUID ID: {},:"+idGenerator.simpleUUID());
 //                System.out.println("randomUUID ID: {},:"+idGenerator.randomUUID());

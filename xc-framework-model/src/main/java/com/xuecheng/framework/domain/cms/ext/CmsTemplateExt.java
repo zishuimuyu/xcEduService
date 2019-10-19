@@ -2,6 +2,7 @@ package com.xuecheng.framework.domain.cms.ext;
 
 import com.xuecheng.framework.domain.cms.CmsTemplate;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -12,6 +13,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@NoArgsConstructor
 public class CmsTemplateExt extends CmsTemplate {
 
     /**

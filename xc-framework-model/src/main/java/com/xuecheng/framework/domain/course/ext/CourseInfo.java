@@ -12,6 +12,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@NoArgsConstructor
 public class CourseInfo extends CourseBase {
 
     /**

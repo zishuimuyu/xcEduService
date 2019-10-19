@@ -1,9 +1,7 @@
 package com.xuecheng.framework.domain.system;
 
 import lombok.Data;
-import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
@@ -13,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 public class SysDictionaryValue {
     /**
      * 项目id

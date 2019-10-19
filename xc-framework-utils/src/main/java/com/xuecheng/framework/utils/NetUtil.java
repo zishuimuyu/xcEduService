@@ -22,7 +22,8 @@ public class NetUtil {
     /**
      * 使用Ip判断该Ip对应的计算机网络是否畅通
      *
-     * @return Bool
+     * @param ip 目标IP
+     * @return
      */
     public static Boolean isConnectedByIp(String ip) {
         boolean reachable = false;
@@ -37,6 +38,9 @@ public class NetUtil {
 
     /**
      * 通过Ping  ip/域名 的方式测试网路连接状态
+     *
+     * @param ip 目标ip
+     * @return
      */
     public static Boolean ping(String ip) {
         //定义其返回的状态，默认为false，网络不正常
@@ -84,6 +88,7 @@ public class NetUtil {
      * 判断本机网络是否畅通(外网)
      *
      * @return
+     * @throws Exception
      */
     public static Boolean isConnectedSelf() throws Exception {
         URL url = new URL("https://www.baidu.com");

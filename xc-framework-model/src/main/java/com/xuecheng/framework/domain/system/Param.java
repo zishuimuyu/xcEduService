@@ -1,13 +1,10 @@
 package com.xuecheng.framework.domain.system;
 
-import javafx.scene.control.RadioMenuItem;
 import lombok.Data;
-import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -18,7 +15,7 @@ import javax.persistence.Table;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "t_param")
 public class Param {

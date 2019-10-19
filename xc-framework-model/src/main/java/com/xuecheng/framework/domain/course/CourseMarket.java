@@ -1,6 +1,7 @@
 package com.xuecheng.framework.domain.course;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,6 +18,7 @@ import java.util.Date;
  */
 @Data
 @ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "course_market")
 @GenericGenerator(name = "jpa-assigned", strategy = "assigned")

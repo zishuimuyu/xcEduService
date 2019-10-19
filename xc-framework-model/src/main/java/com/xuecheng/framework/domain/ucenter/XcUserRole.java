@@ -14,7 +14,7 @@ import java.util.Date;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 @Entity
 @Table(name="xc_user_role")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")

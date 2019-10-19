@@ -1,7 +1,7 @@
 package com.xuecheng.framework.domain.portalview;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 @Document(collection = "view_course_media")
 public class ViewCourseMedia implements Serializable{
 

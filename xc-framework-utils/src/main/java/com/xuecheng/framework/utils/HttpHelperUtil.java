@@ -22,6 +22,7 @@ import java.net.URL;
 
 /**
  * http工具类
+ *
  * @author：GJH
  * @createDate：2019/10/9
  * @company：洪荒宇宙加力蹲大学
@@ -34,19 +35,15 @@ public class HttpHelperUtil {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000).setConnectTimeout(2000).build();
         httpGet.setConfig(requestConfig);
-
         try {
             response = httpClient.execute(httpGet, new BasicHttpContext());
-
             if (response.getStatusLine().getStatusCode() != 200) {
-
-                System.out.println("request url failed, http code=" + response.getStatusLine().getStatusCode()
-                        + ", url=" + url);
+                System.out.println("request url failed, http code=" + response.getStatusLine().getStatusCode()+ ", url=" + url);
                 return null;
             }
             HttpEntity entity = response.getEntity();
             if (entity != null) {
-                String resultStr = EntityUtils.toString(entity, "utf-8");
+                String resultStr = EntityUtils.toString(entity, "UTF-8");
                 JSONObject result = JSON.parseObject(resultStr);
                 if (!result.containsKey("errcode")) {
                     return result;
@@ -59,19 +56,24 @@ public class HttpHelperUtil {
             System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
             e.printStackTrace();
         } finally {
-            if (response != null){
+            if (response != null) {
                 try {
                     response.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
         }
-
         return null;
     }
 
+    /**
+     * 发送POST请求
+     *
+     * @param url  请求url
+     * @param data 参数 JSON格式
+     * @return
+     */
     public static JSONObject httpPost(String url, Object data) {
         HttpPost httpPost = new HttpPost(url);
         CloseableHttpResponse response = null;
@@ -79,31 +81,23 @@ public class HttpHelperUtil {
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(10000).setConnectTimeout(10000).build();
         httpPost.setConfig(requestConfig);
         httpPost.addHeader("Content-Type", "application/json");
-
         try {
-
             StringEntity requestEntity = new StringEntity(JSON.toJSONString(data), "utf-8");
             httpPost.setEntity(requestEntity);
-
             response = httpClient.execute(httpPost, new BasicHttpContext());
-
             if (response.getStatusLine().getStatusCode() != 200) {
-
-                System.out.println("request url failed, http code=" + response.getStatusLine().getStatusCode()
-                        + ", url=" + url);
+                System.out.println("request url failed, http code=" + response.getStatusLine().getStatusCode() + ", url=" + url);
                 return null;
             }
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 String resultStr = EntityUtils.toString(entity, "utf-8");
-
                 JSONObject result = JSON.parseObject(resultStr);
                 if (!result.containsKey("errcode")) {
                     result.remove("errcode");
                     result.remove("errmsg");
                     return result;
                 } else {
-
                     int errCode = result.getIntValue("errcode");
                     String errMsg = result.getString("errmsg");
                 }
@@ -112,7 +106,7 @@ public class HttpHelperUtil {
             System.out.println("request url=" + url + ", exception, msg=" + e.getMessage());
             e.printStackTrace();
         } finally {
-            if (response != null){
+            if (response != null) {
                 try {
                     response.close();
                 } catch (IOException e) {
@@ -126,11 +120,11 @@ public class HttpHelperUtil {
     }
 
 
-
     /**
      * 文件上传到微信服务器
+     *
      * @param fileType 文件类型
-     * @param filePath  文件路径
+     * @param filePath 文件路径
      * @param url
      * @return
      * @throws Exception
@@ -181,7 +175,7 @@ public class HttpHelperUtil {
         in.close();
         // 结尾部分
         // 定义最后数据分隔线
-        byte[] foot = ("\r\n--" + BOUNDARY + "--\r\n").getBytes("utf-8");
+        byte[] foot = ("\r\n--" + BOUNDARY + "--\r\n").getBytes("UTF-8");
         out.write(foot);
         out.flush();
         out.close();
@@ -213,6 +207,7 @@ public class HttpHelperUtil {
 
     /**
      * 发送不带参数的HttpPost请求
+     *
      * @param url
      * @return
      * @throws IOException
@@ -235,7 +230,7 @@ public class HttpHelperUtil {
         try {
             result = EntityUtils.toString(entity);
         } catch (ParseException | IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return result;
     }
@@ -243,6 +238,7 @@ public class HttpHelperUtil {
 
     /**
      * 以jsonString形式发送HttpPost的Json请求，String形式返回响应结果
+     *
      * @param url
      * @param jsonString
      * @return
@@ -253,8 +249,7 @@ public class HttpHelperUtil {
             return sendPost(url);
         }
         String resp = "";
-        StringEntity entityStr = new StringEntity(jsonString,
-                ContentType.create("text/plain", "UTF-8"));
+        StringEntity entityStr = new StringEntity(jsonString, ContentType.create("text/plain", "UTF-8"));
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
         httpPost.setEntity(entityStr);
@@ -273,7 +268,7 @@ public class HttpHelperUtil {
                 try {
                     response.close();
                 } catch (IOException e) {
-                   // log.error(e.getMessage());
+                    // log.error(e.getMessage());
                     e.printStackTrace();
                 }
             }

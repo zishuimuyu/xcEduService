@@ -5,7 +5,6 @@ import com.xuecheng.framework.model.response.ResultCode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  *
@@ -14,7 +13,6 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class CheckChunkResult extends ResponseResult{
 

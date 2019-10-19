@@ -4,7 +4,7 @@ import com.xuecheng.framework.domain.order.XcOrdersPay;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.framework.model.response.ResultCode;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -13,7 +13,7 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 public class PayOrderResult extends ResponseResult {
     public PayOrderResult(ResultCode resultCode) {
         super(resultCode);

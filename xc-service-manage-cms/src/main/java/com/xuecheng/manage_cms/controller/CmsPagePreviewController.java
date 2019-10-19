@@ -19,7 +19,7 @@ import java.io.IOException;
  * @company：洪荒宇宙加力蹲大学
  */
 @Controller
-public class CmsPagePreviewController extends BaseController {
+public class  CmsPagePreviewController extends BaseController {
     @Autowired
     CmsPageService cmsPageService;
 
@@ -34,6 +34,8 @@ public class CmsPagePreviewController extends BaseController {
         //通过request发送请求,将内容输出,
         try {
             ServletOutputStream outputStream = response.getOutputStream();
+            //使输出的文件时html\静态页面,墓地是为了让nginx通过ssi技术合并页面(ssi只支持静态文件)
+            response.setHeader("Content‐type","text/html;charset=utf‐8");
             outputStream.write(pageHtml.getBytes("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();

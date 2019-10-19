@@ -8,6 +8,7 @@ import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.CourseView;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
+import com.xuecheng.framework.domain.course.response.CoursePublishResult;
 import com.xuecheng.framework.domain.course.response.CourseResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
@@ -133,5 +134,13 @@ public interface CourseControllerApi {
      */
     @ApiOperation("课程视图查询")
     public CourseView courseview(String courseId);
+
+    /**
+     * 课程预览
+     * @param courseId 课程id
+     * @return
+     */
+    @ApiOperation("课程预览")
+    public CoursePublishResult preview(String courseId);
 
 }

@@ -1,6 +1,7 @@
 package com.xuecheng.framework.domain.course;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,6 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
+@NoArgsConstructor
 @Entity
 @Table(name="teachplan_media")
 @GenericGenerator(name = "jpa-assigned", strategy = "assigned")

@@ -2,7 +2,7 @@ package com.xuecheng.framework.domain.ucenter.request;
 
 import com.xuecheng.framework.model.request.RequestData;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -11,7 +11,7 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 public class LoginRequest extends RequestData {
 
     String username;

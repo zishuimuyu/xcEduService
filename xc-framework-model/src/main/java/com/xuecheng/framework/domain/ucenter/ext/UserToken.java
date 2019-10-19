@@ -2,7 +2,6 @@ package com.xuecheng.framework.domain.ucenter.ext;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  *
@@ -11,7 +10,6 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class UserToken{
     /**
