@@ -14,7 +14,6 @@ import java.util.List;
  * @createDate：2019/2/24
  */
 @Data
-@ToString
 @Document(collection = "cms_page")
 public class CmsPage {
     /**

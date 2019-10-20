@@ -15,7 +15,6 @@ import java.util.Date;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 @Entity
 @Table(name = "course_index")

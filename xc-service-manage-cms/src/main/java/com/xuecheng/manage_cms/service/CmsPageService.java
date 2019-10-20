@@ -6,10 +6,12 @@ import com.mongodb.client.gridfs.GridFSDownloadStream;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.xuecheng.framework.domain.cms.CmsConfig;
 import com.xuecheng.framework.domain.cms.CmsPage;
+import com.xuecheng.framework.domain.cms.CmsSite;
 import com.xuecheng.framework.domain.cms.CmsTemplate;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsCode;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.CmsPostPageResult;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
@@ -19,6 +21,7 @@ import com.xuecheng.framework.utils.StringUtil;
 import com.xuecheng.manage_cms.config.RabbitmqConfig;
 import com.xuecheng.manage_cms.dao.CmsConfigRepository;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
+import com.xuecheng.manage_cms.dao.CmsSiteRepository;
 import com.xuecheng.manage_cms.dao.CmsTemplateRepository;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
@@ -58,6 +61,8 @@ public class CmsPageService {
     @Autowired
     CmsPageRepository cmsPageRepository;
     @Autowired
+    CmsSiteRepository cmsSiteRepository;
+    @Autowired
     CmsTemplateRepository cmsTemplateRepository;
     @Autowired
     RestTemplate restTemplate;
@@ -67,6 +72,7 @@ public class CmsPageService {
     GridFSBucket gridFSBucket;
     @Autowired
     RabbitTemplate rabbitTemplate;
+
     /**
      * 页面查询方法
      *
@@ -153,7 +159,7 @@ public class CmsPageService {
     /**
      * 修改更新页面
      *
-     * @param id 课程id
+     * @param id      课程id
      * @param cmsPage 课程对象
      * @return
      */
@@ -237,7 +243,7 @@ public class CmsPageService {
             ExceptionCast.cast(CmsCode.CMS_GENERATEHTML_TEMPLATEISNULL);
         }
         // 4 执行页面静态化
-        String html = generateHtml(template, model);
+        String html = this.generateHtml(template, model);
 
         return html;
     }
@@ -293,7 +299,7 @@ public class CmsPageService {
     }
 
     /**
-     * 根据模板和数据,获取页面
+     * 根据模板和数据,获取页面,执行静态化
      *
      * @param templateContent 模板内容
      * @param model           模型数据
@@ -337,21 +343,22 @@ public class CmsPageService {
 
     /**
      * 把html文件保存进GridFS
+     *
      * @param pageId
      * @param htmlContent
      * @return
      */
-    private CmsPage saveHtmlFileToGridFS(String pageId,String htmlContent){
+    private CmsPage saveHtmlFileToGridFS(String pageId, String htmlContent) {
         CmsPage cmsPage = this.getCmsPageById(pageId);
-        if (cmsPage==null){
+        if (cmsPage == null) {
             ExceptionCast.cast(CommonCode.INVALID_PARAM);
         }
-        ObjectId objectId=null;
+        ObjectId objectId = null;
         InputStream inputStream = null;
         try {
             inputStream = IOUtils.toInputStream(htmlContent, "UTF-8");
             //将html文件保存进GridFS
-             objectId = gridFsTemplate.store(inputStream, cmsPage.getPageName());
+            objectId = gridFsTemplate.store(inputStream, cmsPage.getPageName());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -364,36 +371,80 @@ public class CmsPageService {
 
     /**
      * 向MQ发消息
+     *
      * @param pageId
      */
-    private void sendPostPage(String pageId){
+    private void sendPostPage(String pageId) {
         //得到页面信息
         CmsPage cmsPage = this.getCmsPageById(pageId);
-        if (cmsPage==null){
+        if (cmsPage == null) {
             ExceptionCast.cast(CommonCode.INVALID_PARAM);
         }
         //创建消息对象
         HashMap<String, String> msg = new HashMap<String, String>();
-        msg.put("pageI",pageId);
+        msg.put("pageId", pageId);
         //转为String
         String msgStr = JSON.toJSONString(msg);
         //发送给MQ
-        rabbitTemplate.convertAndSend(RabbitmqConfig.EX_ROUTING_CMS_POSTPAGE,cmsPage.getSiteId(),msgStr);
+        rabbitTemplate.convertAndSend(RabbitmqConfig.EX_ROUTING_CMS_POSTPAGE, cmsPage.getSiteId(), msgStr);
     }
 
     /**
      * 保存页面,已存在则更新,不存在就新增
+     *
      * @param cmsPage
      * @return
      */
     public CmsPageResult save(CmsPage cmsPage) {
         //根据页面唯一索引判断页面是否已存在
         CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
-        if (cmsPage1!=null){
+        if (cmsPage1 != null) {
             //已存在,更新
-           return this.update(cmsPage1.getPageId(),cmsPage);
+            return this.update(cmsPage1.getPageId(), cmsPage);
         }
         //不存在就添加
         return this.add(cmsPage);
+    }
+
+    /**
+     * 一键发布页面
+     *
+     * @param cmsPage 页面对象
+     * @return
+     */
+    public CmsPostPageResult postPageQuick(CmsPage cmsPage) {
+        //1.将页面信息存储到mongoDB的cms_page集合中
+        CmsPageResult save = this.save(cmsPage);
+        if (!save.isSuccess()) {
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+        CmsPage cmsPageSave = save.getCmsPage();
+        String pageId = cmsPageSave.getPageId();
+        //2.执行页面发布的方法(先静态化,再保存到GridFS中,再向MQ发消息)
+        ResponseResult post = this.post(pageId);
+        if (!post.isSuccess()) {
+            ExceptionCast.cast(CommonCode.FAIL);
+        }
+        //拼装页面URL 页面 Url= cmsSite.siteDomain+cmsSite.siteWebPath+ cmsPage.pageWebPath + cmsPage.pageName
+        String siteId = cmsPageSave.getSiteId();
+        CmsSite cmsSite = this.findCmsSiteById(siteId);
+        String pageUrl = cmsSite.getSiteDomain() + cmsSite.getSiteWebPath() + cmsPageSave.getPageWebPath() + cmsPageSave.getPageName();
+
+        return new CmsPostPageResult(CommonCode.SUCCESS, pageUrl);
+    }
+
+    /**
+     * 根据ID查询CmsSite配置信息
+     *
+     * @param siteId 站点id
+     * @return
+     */
+    public CmsSite findCmsSiteById(String siteId) {
+        Optional<CmsSite> optional = cmsSiteRepository.findById(siteId);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            return null;
+        }
     }
 }

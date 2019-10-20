@@ -4,6 +4,7 @@ import com.xuecheng.api.cms.CmsPageControllerApi;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.CmsPostPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.service.CmsPageService;
@@ -24,6 +25,13 @@ public class CmsPageController implements CmsPageControllerApi {
     @Autowired
     CmsPageService cmsPageService;
 
+    /**
+     * 页面列表分页查询
+     * @param page             页码
+     * @param size             页面大小
+     * @param queryPageRequest 查询条件Model
+     * @return
+     */
     @Override
     @GetMapping("/list/{page}/{size}")
     public QueryResponseResult findList(@PathVariable("page") int page, @PathVariable("size") int size, QueryPageRequest queryPageRequest) {
@@ -47,7 +55,7 @@ public class CmsPageController implements CmsPageControllerApi {
     /**
      * 根据ID删除页面
      *
-     * @param id
+     * @param id 页面id
      * @return
      */
     @Override
@@ -59,7 +67,7 @@ public class CmsPageController implements CmsPageControllerApi {
     /**
      * 根据ID查找页面
      *
-     * @param id
+     * @param id 页面id
      * @return
      */
     @Override
@@ -71,7 +79,7 @@ public class CmsPageController implements CmsPageControllerApi {
     /**
      * 修改页面
      *
-     * @param id
+     * @param id 页面id
      * @param cmsPage
      * @return
      */
@@ -103,6 +111,18 @@ public class CmsPageController implements CmsPageControllerApi {
     @PostMapping("/postPage/{pageId}")
     public ResponseResult post(@PathVariable("pageId") String pageId) {
         return cmsPageService.post(pageId);
+    }
+
+    /**
+     * 一键发布页面
+     *
+     * @param cmsPage 页面对象
+     * @return
+     */
+    @Override
+    @PostMapping("/postPageQuick")
+    public CmsPostPageResult postPageQuick(@RequestBody CmsPage cmsPage) {
+        return cmsPageService.postPageQuick(cmsPage);
     }
 
 }

@@ -14,7 +14,6 @@ import java.util.List;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @Document(collection = "cms_config")
 public class CmsConfig {
 

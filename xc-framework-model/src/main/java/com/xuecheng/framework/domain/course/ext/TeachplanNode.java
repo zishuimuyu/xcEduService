@@ -14,7 +14,6 @@ import java.util.List;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class TeachplanNode extends Teachplan {
 

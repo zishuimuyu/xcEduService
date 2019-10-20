@@ -1,13 +1,12 @@
 package com.xuecheng.framework.domain.cms.response;
 
-import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.framework.model.response.ResultCode;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
+ * 页面发布返回的响应结果实体类
  *
  * @author：GJH
  * @createDate：2019/9/28
@@ -15,10 +14,13 @@ import lombok.ToString;
  */
 @Data
 @NoArgsConstructor
-public class CmsPageResult extends ResponseResult {
-    CmsPage cmsPage;
-    public CmsPageResult(ResultCode resultCode,CmsPage cmsPage) {
+public class CmsPostPageResult extends ResponseResult {
+    /**
+     * 页面发布成功cms返回页面的url,页面 Url= cmsSite.siteDomain+cmsSite.siteWebPath+ cmsPage.pageWebPath + cmsPage.pageName
+     */
+    String pageUrl;
+    public CmsPostPageResult(ResultCode resultCode, String pageUrl) {
         super(resultCode);
-        this.cmsPage = cmsPage;
+        this.pageUrl = pageUrl;
     }
 }

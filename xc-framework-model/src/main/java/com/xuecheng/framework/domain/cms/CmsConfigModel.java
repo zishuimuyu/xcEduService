@@ -1,7 +1,7 @@
 package com.xuecheng.framework.domain.cms;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
@@ -12,7 +12,6 @@ import java.util.Map;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class CmsConfigModel {
     private String key;

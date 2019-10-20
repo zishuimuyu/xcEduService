@@ -1,7 +1,7 @@
 package com.xuecheng.framework.domain.cms;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /**
  * cms查询参数
@@ -10,7 +10,6 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class CmsPageParam {
     /**

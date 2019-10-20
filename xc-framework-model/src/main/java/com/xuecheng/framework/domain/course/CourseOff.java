@@ -2,7 +2,6 @@ package com.xuecheng.framework.domain.course;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,7 +15,6 @@ import java.util.Date;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 @Entity
 @Table(name="course_off")

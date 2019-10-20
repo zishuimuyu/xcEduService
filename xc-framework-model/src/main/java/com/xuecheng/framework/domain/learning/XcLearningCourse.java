@@ -1,7 +1,7 @@
 package com.xuecheng.framework.domain.learning;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,7 +15,7 @@ import java.util.Date;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
+@NoArgsConstructor
 @Entity
 @Table(name="xc_learning_course")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")

@@ -213,5 +213,17 @@ public class CourseController implements CourseControllerApi {
         return courseService.preview(courseId);
     }
 
+    /**
+     * 发布课程
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    @Override
+    @PostMapping("/publish/{id}")
+    public CoursePublishResult publish(@PathVariable("id") String courseId) {
+        return courseService.publish(courseId);
+    }
+
 
 }

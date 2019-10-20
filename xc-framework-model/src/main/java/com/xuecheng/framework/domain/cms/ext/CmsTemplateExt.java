@@ -12,7 +12,6 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class CmsTemplateExt extends CmsTemplate {
 

@@ -3,7 +3,6 @@ package com.xuecheng.framework.domain.course.request;
 import com.xuecheng.framework.model.request.RequestData;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  *
@@ -12,7 +11,6 @@ import lombok.ToString;
  * @company：洪荒宇宙加力蹲大学
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class CourseListRequest extends RequestData {
     /**

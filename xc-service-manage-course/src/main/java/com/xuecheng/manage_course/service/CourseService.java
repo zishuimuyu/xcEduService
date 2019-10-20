@@ -2,6 +2,7 @@ package com.xuecheng.manage_course.service;
 
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.CmsPostPageResult;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.CoursePic;
@@ -341,7 +342,7 @@ public class CourseService {
     public CoursePublishResult preview(String courseId) {
         CourseBase courseBase = this.getCoursebaseById(courseId);
         if (courseBase == null) {
-
+            ExceptionCast.cast(CourseCode.COURSE_GET_NOTEXISTS);
         }
         //准备cmsPage信息
         CmsPage cmsPage = new CmsPage();
@@ -370,5 +371,54 @@ public class CourseService {
         return new CoursePublishResult(CommonCode.SUCCESS, url);
     }
 
+    /**
+     * 发布课程
+     *
+     * @param courseId 课程id
+     * @return
+     */
+    @Transactional
+    public CoursePublishResult publish(String courseId) {
+        //1.准备cmsPage信息
+        CourseBase courseBase = this.getCoursebaseById(courseId);
+        if (courseBase == null) {
+            ExceptionCast.cast(CourseCode.COURSE_GET_NOTEXISTS);
+        }
+        CmsPage cmsPage = new CmsPage();
+        cmsPage.setSiteId(publish_siteId);
+        cmsPage.setDataUrl(publish_dataUrlPre + courseId);
+        cmsPage.setPageName(courseId + ".html");
+        cmsPage.setPageAliase(courseBase.getName());
+        cmsPage.setPagePhysicalPath(publish_page_physicalpath);
+        cmsPage.setPageWebPath(publish_page_webpath);
+        cmsPage.setTemplateId(publish_templateId);
+        //2.远程调用cms服务的一键发布接口,将课程详情页面发布到服务器
+        CmsPostPageResult cmsPostPageResult = cmsPageClient.postPageQuick(cmsPage);
+        if (!cmsPostPageResult.isSuccess()) {
+            return new CoursePublishResult(CommonCode.FAIL, null);
+        }
+        //发布成功后,将保存的课程状态改为已发布,202002
+        CourseBase courseBase1 = this.saveCourseStatus(courseId, "202002");
+        if (courseBase1 == null) {
+            return new CoursePublishResult(CommonCode.FAIL, null);
+        }
+        //保存课程索引信息
+        //缓存课程信息
+        String pageUrl = cmsPostPageResult.getPageUrl();
+        return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
+    }
 
+    /**
+     * 更改课程状态
+     *
+     * @param courseId   课程id
+     * @param statusCode 课程状态码
+     * @return
+     */
+    public CourseBase saveCourseStatus(String courseId, String statusCode) {
+        //先查出课程信息
+        CourseBase courseBase = this.getCoursebaseById(courseId);
+        courseBase.setStatus(statusCode);
+        return courseBase;
+    }
 }
