@@ -205,7 +205,7 @@ public class CourseService {
      */
     public CourseMarket getCourseMarketById(String courseId) {
         Optional<CourseMarket> optional = courseMarketRepository.findById(courseId);
-        if (!optional.isPresent()) {
+        if (optional.isPresent()) {
             return optional.get();
         }
         return null;
